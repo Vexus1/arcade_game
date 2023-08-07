@@ -2,7 +2,7 @@ import pyghelpers
 import pygwidgets
 from constants import *
 
-class SceneSplash(pyghelpers.Scene):
+class SceneMainMenu(pyghelpers.Scene):
     def __init__(self, window):
         self.window = window
         self.start_button = pygwidgets.TextButton(window, (500, 100), 'Start')

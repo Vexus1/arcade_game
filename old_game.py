@@ -110,7 +110,7 @@ def draw_text(surf, text, size, x, y, highlight = False):
 
 def draw_lives(surf, x, y, lives, img):
     for i in range(lives):
-        img = pygame.image.load(f"{DIR_PATH}\images\jetfighter.png").convert()
+        img = pygame.image.load(f"{DIR_PATH}\images\player.png").convert()
         img_resieze = 30
         img = pygame.transform.scale(img,(img_resieze, img_resieze))
         img_rect = img.get_rect()
@@ -218,7 +218,7 @@ def show_go_screen():
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.surf = pygame.image.load(f"{DIR_PATH}\images\jetfighter.png").convert()
+        self.surf = pygame.image.load(f"{DIR_PATH}\images\player.png").convert()
         self.space_resieze = 97
         self.surf = pygame.transform.scale(self.surf,(self.space_resieze, self.space_resieze))
         self.rect = self.surf.get_rect()
