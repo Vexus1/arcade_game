@@ -217,7 +217,7 @@ def show_go_screen():
 # Klasa gracza
 class Player(pygame.sprite.Sprite):
     def __init__(self):
-        super(Player, self).__init__()
+        super().__init__()
         self.surf = pygame.image.load(f"{DIR_PATH}\images\jetfighter.png").convert()
         self.space_resieze = 97
         self.surf = pygame.transform.scale(self.surf,(self.space_resieze, self.space_resieze))
@@ -289,7 +289,7 @@ class Player(pygame.sprite.Sprite):
 
 class Beam1(pygame.sprite.Sprite):
     def __init__(self, x, y):
-        super(Beam1, self).__init__()
+        super().__init__()
         self.surf = pygame.Surface((4,20))
         self.surf.fill((0,0,200))
         self.rect = self.surf.get_rect()
@@ -323,7 +323,7 @@ class EnemyBeam(pygame.sprite.Sprite):
 class Enemy(pygame.sprite.Sprite):
 
     def __init__(self):
-        super(Enemy,self).__init__()
+        super().__init__()
         self.surf = pygame.image.load(f"{DIR_PATH}\images\enemy.png").convert()
         self.space_resieze = 30
         self.surf = pygame.transform.scale(self.surf,(self.space_resieze, self.space_resieze))
