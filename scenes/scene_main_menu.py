@@ -17,7 +17,6 @@ class SceneMainMenu(pyghelpers.Scene):
                 self.goToScene(SCENE_PLAY)
             elif self.quit_button.handleEvent(event):
                 self.quit()
-            print()
     
     def draw(self):
         self.start_button.draw()
