@@ -12,7 +12,7 @@ class ScenePlay(pyghelpers.Scene):
         self.player = Player(self.window)
         self.all_sprites = pygame.sprite.Group()
         self.all_sprites.add(self.player)
-        self.background = pygame.Surface((WINDOW_WIDTH, WINDOW_HEIGHT))
+        self.background = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
 
         self.playing_state = STATE_PLAYING
     

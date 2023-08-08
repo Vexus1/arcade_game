@@ -7,12 +7,12 @@ class Player(pygame.sprite.Sprite):
     SPEED = 4
 
     def __init__(self, window):
-        # super().__init__()
+        super().__init__()
         self.window = window
         self.image = pygwidgets.Image(window, (100, 100), 'images/player.png')
         self.rect = self.image.getRect()
-        self.max_x = WINDOW_WIDTH - self.rect.width
-        self.max_y = WINDOW_HEIGHT - self.rect.height
+        self.max_x = SCREEN_WIDTH - self.rect.width
+        self.max_y = SCREEN_HEIGHT - self.rect.height
 
     def update(self, x, y):
         '''Method that handle players moves (WASD) limits area (window size) to move for player sprite'''
