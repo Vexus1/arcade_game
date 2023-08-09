@@ -1,5 +1,5 @@
 from stage import Stage
 
-class HighScore(Stage):
+class Rules(Stage):
     def __init__(self):
         pass

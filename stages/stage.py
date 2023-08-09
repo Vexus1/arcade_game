@@ -16,8 +16,8 @@ class Stage(ABC):
     def get_stage(self):
         raise NotImplementedError
     
-    def next_stage(self, next_scene):
-        return next_scene
+    def next_stage(self, next_stage_key):
+        return self.stage_mgr._get_current_stage(next_stage_key)
     
     def _reference_to_stage_menager(self, stage_mgr):
         self.stage_mgr = stage_mgr

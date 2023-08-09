@@ -1,12 +1,11 @@
-import pyghelpers
-import pygwidgets
+from stages.stage import Stage
 from player import *
 
 STATE_PAUSE = 'pause'
 STATE_PLAYING = 'playing'
 STATE_GAME_OVER = 'game over'
 
-class Play(pyghelpers.Scene):
+class Play(Stage):
     def __init__(self, window):
         self.window = window
         self.player = Player(self.window)

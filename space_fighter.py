@@ -3,10 +3,7 @@ import os
 import sys
 
 from constants import *
-from scenes.scene_main_menu import *
-from scenes.scene_play import *
-from scenes.scene_high_score import *
-from scenes.scene_rules import *
+from stage_menager import *
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -16,8 +13,6 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 # scenes_list = [SceneSplash(window), ScenePlay(window),
 #                SceneHighScore(window), SceneRules(window)]
 clock = pygame.time.Clock()
-scenes_list = [SceneMainMenu(screen), ScenePlay(screen)]
-curent_scene = scenes_list[0]
 
 while True:
     keys_pressed = pygame.key.get_pressed()
@@ -29,10 +24,11 @@ while True:
 
         events_list.append(event)
 
-    if curent_scene.next_scene()
-    self.oCurrentScene.handleInputs(eventsList, keysDownList)
-    self.oCurrentScene.update()
-    self.oCurrentScene.draw()
+    # if curent_scene.next_scene():
+    current_stage = StageMenager()
+    current_stage.get_current_stage().handle_inputs(events_list, keys_pressed)
+    current_stage.get_current_stage().update()
+    current_stage.get_current_stage().draw()
 
     pygame.display.update()
 
