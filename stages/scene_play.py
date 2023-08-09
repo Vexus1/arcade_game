@@ -6,7 +6,7 @@ STATE_PAUSE = 'pause'
 STATE_PLAYING = 'playing'
 STATE_GAME_OVER = 'game over'
 
-class ScenePlay(pyghelpers.Scene):
+class Play(pyghelpers.Scene):
     def __init__(self, window):
         self.window = window
         self.player = Player(self.window)
