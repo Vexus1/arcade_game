@@ -12,37 +12,36 @@ class MainMenu(Stage):
         self.high_score_button = TextButton(self.screen, 'High Score', (500, 200), STAGE_HIGH_SCORE)
         self.rules_button = TextButton(self.screen, 'Rules', (500, 300), STAGE_RULES)
         self.quit_button = TextButton(self.screen, 'Quit', (500, 400))
-        buttons_list = [self.start_button, self.high_score_button,
+        self.buttons_list = [self.start_button, self.high_score_button,
                         self.rules_button, self.quit_button]
-        self.buttons_dict = {i: buttons_list[i] for i in range(len(buttons_list))}
         self.button_number = 0
     
     def get_stage(self):
         return STAGE_MAIN_MENU
 
     def handle_inputs(self, events, key_pressed_list):
-        self.buttons_dict[self.button_number].selected()
+        self.buttons_list[self.button_number].selected()
         for event in events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_s:
-                    self.buttons_dict[self.button_number].unselected()
+                    self.buttons_list[self.button_number].unselected()
                     self.button_number += 1
-                    if self.button_number > len(self.buttons_dict.values())-1:
+                    if self.button_number > len(self.buttons_list)-1:
                         self.button_number = 0
-                    self.buttons_dict[self.button_number].selected()
+                    self.buttons_list[self.button_number].selected()
                     print(self.button_number)
                 elif event.key == pygame.K_w:
-                    self.buttons_dict[self.button_number].unselected()
+                    self.buttons_list[self.button_number].unselected()
                     self.button_number -= 1
                     if self.button_number < 0:
-                        self.button_number = len(self.buttons_dict.values())-1
-                    self.buttons_dict[self.button_number].selected()
+                        self.button_number = len(self.buttons_list)-1
+                    self.buttons_list[self.button_number].selected()
                     print(self.button_number)
                 elif event.key == pygame.K_RETURN:
-                    if self.button_number == len(self.buttons_dict.values())-1:
+                    if self.button_number == len(self.buttons_list)-1:
                         pygame.quit()
                         sys.exit()
-                    self.manager.next_stage(self.buttons_dict[self.button_number].stage_reference())
+                    self.manager.next_stage(self.buttons_list[self.button_number].stage_reference())
         
     def draw(self):
         self.start_button.draw()
