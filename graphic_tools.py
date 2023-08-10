@@ -29,9 +29,9 @@ class TextButton():
     
     def stage_reference(self):
         return self.stage
+   
 
-
-
-# class Button():
-#     def __init__(self, screen, )
+class Image():
+    def __init__(self, screen, loc, size):
+        pass
 

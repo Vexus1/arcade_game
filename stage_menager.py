@@ -2,14 +2,14 @@
 import pygame
 from stages.main_menu import *
 from stages.play import *
-# from stages.stage import *
-# from stages.high_score import HighScore
-# from stages.rules import Rules
-# from stages.pause import Pause
+from stages.high_score import *
+from stages.rules import *
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
 class StageMenager():
     def __init__(self):
+        # self.stages_list = [MainMenu(self, screen), Play(self, screen),
+        #                     HighScore(self, screen), Rules(self, screen)]
         self.stages_list = [MainMenu(self, screen), Play(self, screen)]
         self.stages_dict = {}
         for stage in self.stages_list:
@@ -24,5 +24,4 @@ class StageMenager():
             raise KeyError("Stage doesn't exist.")
 
     def get_current_stage(self):
-        # if self.current_stage.next_stage():
         return self.current_stage

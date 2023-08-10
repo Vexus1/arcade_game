@@ -1,6 +1,10 @@
+import pygame
+
 SCREEN_WIDTH = 1440
 SCREEN_HEIGHT = 900
+SCREENRECT = pygame.Rect(0, 0, 1440, 900)
 FPS = 60
+
 
 STAGE_MAIN_MENU = 'stage main menu'
 STAGE_PLAY = 'stage play'

@@ -1,39 +1,25 @@
 import pygame
 import pygwidgets
 from constants import *
-import os
 
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
-
+SPEED = 4
 class Player(pygame.sprite.Sprite):
-
-    SPEED = 4
-
-    def __init__(self, window):
+    def __init__(self, screen):
         super().__init__()
-        self.window = window
-        self.image = pygwidgets.Image(window, (100, 100), 'images/player.png')
-        self.rect = self.image.getRect()
+        self.screen = screen
+        self.image = pygame.image.load('images/player.png').convert()
+        self.rect = self.image.get_rect(midbottom=SCREENRECT.midbottom)
         self.max_x = SCREEN_WIDTH - self.rect.width
         self.max_y = SCREEN_HEIGHT - self.rect.height
 
     def update(self, x, y):
         '''Method that handle players moves (WASD) limits area (window size) to move for player sprite'''
-        # rect_loc = self.image.getRect()
-     
-        print(self.image.getX())
-
-        self.image.moveXY(x*self.SPEED, y*self.SPEED)
-        if self.image.getX() <= 0:
-            self.image.setLoc((0, self.rect[1]))
-
-        # print(self.rect.left)
-        # if self.rect.height < 0 or self.rect.height > self.max_y:
-        #     y = 0
-        
- 
-        # return self.rect
-    
-    
-    def draw(self):
-        self.image.draw()
+        self.rect.move_ip(x*SPEED, y*SPEED)
+        if self.rect.top < 0:
+            self.rect.top = 0
+        if self.rect.top > self.max_y:
+            self.rect.top = self.max_y
+        if self.rect.left < 0:
+            self.rect.left = 0
+        if self.rect.left > self.max_x:
+            self.rect.left = self.max_x

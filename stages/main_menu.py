@@ -13,30 +13,28 @@ class MainMenu(Stage):
         self.rules_button = TextButton(self.screen, 'Rules', (500, 300), STAGE_RULES)
         self.quit_button = TextButton(self.screen, 'Quit', (500, 400))
         self.buttons_list = [self.start_button, self.high_score_button,
-                        self.rules_button, self.quit_button]
+                             self.rules_button, self.quit_button]
         self.button_number = 0
     
     def get_stage(self):
         return STAGE_MAIN_MENU
 
     def handle_inputs(self, events, key_pressed_list):
+
+        for button in self.buttons_list:
+            button.unselected()
         self.buttons_list[self.button_number].selected()
+        
         for event in events:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_s:
-                    self.buttons_list[self.button_number].unselected()
                     self.button_number += 1
                     if self.button_number > len(self.buttons_list)-1:
                         self.button_number = 0
-                    self.buttons_list[self.button_number].selected()
-                    print(self.button_number)
                 elif event.key == pygame.K_w:
-                    self.buttons_list[self.button_number].unselected()
                     self.button_number -= 1
                     if self.button_number < 0:
                         self.button_number = len(self.buttons_list)-1
-                    self.buttons_list[self.button_number].selected()
-                    print(self.button_number)
                 elif event.key == pygame.K_RETURN:
                     if self.button_number == len(self.buttons_list)-1:
                         pygame.quit()

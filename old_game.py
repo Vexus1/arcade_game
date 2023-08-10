@@ -220,7 +220,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.surf = pygame.image.load(f"{DIR_PATH}\images\player.png").convert()
         self.space_resieze = 97
-        self.surf = pygame.transform.scale(self.surf,(self.space_resieze, self.space_resieze))
+        # self.surf = pygame.transform.scale(self.surf,(self.space_resieze, self.space_resieze))
         self.rect = self.surf.get_rect()
         self.rect.x = WIDTH/2
         self.rect.y = HEIGHT - self.space_resieze

@@ -1,15 +1,15 @@
-import stage_menager
+from stages.stage import Stage
 from player import *
 
 STATE_PAUSE = 'pause'
 STATE_PLAYING = 'playing'
 STATE_GAME_OVER = 'game over'
 
-class Play(stage_menager.Stage):
-    def __init__(self, manager, window):
-        self.manager = manager
-        self.window = window
-        self.player = Player(self.window)
+class Play(Stage):
+    def __init__(self, manager, screen):
+        super().__init__(manager)
+        self.screen = screen
+        self.player = Player(self.screen)
         self.all_sprites = pygame.sprite.Group()
         self.all_sprites.add(self.player)
         self.background = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -34,5 +34,6 @@ class Play(stage_menager.Stage):
         # self.all_sprites.clear(self.window, self.background)
 
     def draw(self):
-        self.window.fill(BLACK)
-        self.player.draw()
+        self.screen.fill(BLACK)
+        for entity in self.all_sprites:
+            self.screen.blit(entity.image, entity.rect)
