@@ -2,27 +2,34 @@
 
 from stages.main_menu import *
 from stages.play import *
+# from stages.stage import *
 # from stages.high_score import HighScore
 # from stages.rules import Rules
 # from stages.pause import Pause
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-stages_list = [MainMenu(screen), Play(screen)]
+# stages_list = [MainMenu(screen)]
 
 class StageMenager():
     def __init__(self):
+        self.stages_list = [MainMenu(self, screen), Play(self, screen)]
         self.stages_dict = {}
-        for stage in stages_list:
+        for stage in self.stages_list:
             key = stage.get_stage()
             self.stages_dict[key] = stage
-        self.current_stage = stages_list[0]
+        self.current_stage = self.stages_list[0]
         
-
-    def _get_current_stage(self, next_stage_key):
+    # def _get_current_stage(self):
+    #     try:
+    #         self.current_stage = self.stages_dict[next_stage_key]
+    #     except KeyError:
+    #         raise KeyError("Stage doesn't exist.")
+    
+    def next_stage(self, next_stage):
         try:
-            self.current_stage = self.stages_dict[next_stage_key]
+            self.current_stage = self.stages_dict[next_stage]
         except KeyError:
-            raise KeyError("Trying to go to scene '" + next_stage_key +
-                "' but that key is not in the dictionary of stages.")
-        
+            raise KeyError("Stage doesn't exist.")
+
     def get_current_stage(self):
+        # if self.current_stage.next_stage():
         return self.current_stage

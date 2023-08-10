@@ -1,6 +1,9 @@
 import pygame
 import pygwidgets
 from constants import *
+import os
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 class Player(pygame.sprite.Sprite):
 

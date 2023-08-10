@@ -1,24 +1,24 @@
-from stages.stage import Stage
+import stage_menager
 from player import *
 
 STATE_PAUSE = 'pause'
 STATE_PLAYING = 'playing'
 STATE_GAME_OVER = 'game over'
 
-class Play(Stage):
-    def __init__(self, window):
+class Play(stage_menager.Stage):
+    def __init__(self, manager, window):
+        self.manager = manager
         self.window = window
         self.player = Player(self.window)
         self.all_sprites = pygame.sprite.Group()
         self.all_sprites.add(self.player)
         self.background = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
-
         self.playing_state = STATE_PLAYING
     
-    def getSceneKey(self):
-        return SCENE_PLAY
+    def get_stage(self):
+        return STAGE_PLAY
     
-    def handleInputs(self, events, key_pressed_list):
+    def handle_inputs(self, events, key_pressed_list):
         if key_pressed_list[pygame.K_w]:
             self.player.update(0,-1)
         elif key_pressed_list[pygame.K_a]:
@@ -37,5 +37,4 @@ class Play(Stage):
 
     def draw(self):
         self.window.fill(BLACK)
-
         self.player.draw()

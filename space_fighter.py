@@ -13,6 +13,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 # scenes_list = [SceneSplash(window), ScenePlay(window),
 #                SceneHighScore(window), SceneRules(window)]
 clock = pygame.time.Clock()
+current_stage = StageMenager()
 
 while True:
     keys_pressed = pygame.key.get_pressed()
@@ -25,7 +26,6 @@ while True:
         events_list.append(event)
 
     # if curent_scene.next_scene():
-    current_stage = StageMenager()
     current_stage.get_current_stage().handle_inputs(events_list, keys_pressed)
     current_stage.get_current_stage().update()
     current_stage.get_current_stage().draw()

@@ -138,7 +138,7 @@ def showMenu_rules():
     draw_text(screen, "Gra polega na nieskończonym powtarzaniu 3 etapów, w których pojawiają się statki wroga.", 32, WIDTH/2, 550)
     draw_text(screen, "Po każdym przejściu 3 etapów następuje przyśpieszenie rozgrywki", 32, WIDTH/2, 600)
     draw_text(screen, "Możesz strzelać dopiero po upłynięciu 3 sekund od ropoczęcia każdego etapu.", 32, WIDTH/2, 650)
-    # pygame.display.flip()
+    pygame.display.flip()
     waiting = True
     while waiting:
         for event in pygame.event.get():
