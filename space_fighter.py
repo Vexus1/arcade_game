@@ -8,10 +8,6 @@ from stage_menager import *
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 pygame.init()
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-
-# scenes_list = [SceneSplash(window), ScenePlay(window),
-#                SceneHighScore(window), SceneRules(window)]
 clock = pygame.time.Clock()
 current_stage = StageMenager()
 

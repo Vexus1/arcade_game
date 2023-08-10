@@ -28,8 +28,6 @@ class Play(stage_menager.Stage):
         elif key_pressed_list[pygame.K_d]:
             self.player.update(1,0)
 
-        
-
     def update(self):
         if self.playing_state != STATE_PLAYING:
             return  # Updates only in playing state.

@@ -1,5 +1,5 @@
 # from stages.stage import _reference_to_stage_menager
-
+import pygame
 from stages.main_menu import *
 from stages.play import *
 # from stages.stage import *
@@ -7,7 +7,6 @@ from stages.play import *
 # from stages.rules import Rules
 # from stages.pause import Pause
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-# stages_list = [MainMenu(screen)]
 
 class StageMenager():
     def __init__(self):
@@ -17,12 +16,6 @@ class StageMenager():
             key = stage.get_stage()
             self.stages_dict[key] = stage
         self.current_stage = self.stages_list[0]
-        
-    # def _get_current_stage(self):
-    #     try:
-    #         self.current_stage = self.stages_dict[next_stage_key]
-    #     except KeyError:
-    #         raise KeyError("Stage doesn't exist.")
     
     def next_stage(self, next_stage):
         try:
