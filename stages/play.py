@@ -10,11 +10,12 @@ class Play(Stage):
         super().__init__(manager)
         self.screen = screen
         self.player = Player(self.screen)
+        self.enemy = self
         self.all_sprites = pygame.sprite.Group()
         self.all_sprites.add(self.player)
         self.background = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.playing_state = STATE_PLAYING
-    
+
     def get_stage(self):
         return STAGE_PLAY
     
@@ -30,8 +31,7 @@ class Play(Stage):
 
     def update(self):
         if self.playing_state != STATE_PLAYING:
-            return  # Updates only in playing state.
-        # self.all_sprites.clear(self.window, self.background)
+            return  
 
     def draw(self):
         self.screen.fill(BLACK)
