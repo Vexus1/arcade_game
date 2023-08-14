@@ -42,6 +42,7 @@ class MainMenu(Stage):
                     self.manager.next_stage(self.buttons_list[self.button_number].stage_reference())
         
     def draw(self):
+        self.screen.fill(BLACK)
         self.start_button.draw()
         self.high_score_button.draw()
         self.rules_button.draw()

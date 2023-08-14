@@ -11,15 +11,24 @@ class Play(Stage):
         super().__init__(manager)
         self.screen = screen
         self.player = Player(self.screen)
-        self.enemy = Enemy(self.screen)
-        self.all_sprites = pygame.sprite.Group()
-        self.all_sprites.add(self.player)
-        self.all_sprites.add(self.enemy)
+        self.enemy_list = [Enemy(self.screen, (100, 200)), Enemy(self.screen, (300, 200)),
+                           Enemy(self.screen, (500, 200)), Enemy(self.screen, (700, 200)),
+                           Enemy(self.screen, (900, 200)), Enemy(self.screen, (1100, 200)),
+                           Enemy(self.screen, (1300, 200)), Enemy(self.screen, (1500, 200))]
         self.background = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.playing_state = STATE_PLAYING
+        self.all_sprites = pygame.sprite.RenderUpdates()
+        self.enemies = pygame.sprite.Group()
+        self.set_sprites()
 
     def get_stage(self):
         return STAGE_PLAY
+    
+    def set_sprites(self):
+        self.all_sprites.add(self.player)
+        for enemy in self.enemy_list:
+            self.enemies.add(enemy)
+            self.all_sprites.add(enemy)
     
     def handle_inputs(self, events, key_pressed_list):
         if key_pressed_list[pygame.K_w]:
@@ -34,6 +43,11 @@ class Play(Stage):
     def update(self):
         if self.playing_state != STATE_PLAYING:
             return  
+        
+        # Detect collisions between aliens and players.
+        for enemy in pygame.sprite.spritecollide(self.player, self.enemies, True):
+            self.player.kill()
+            self.manager.next_stage(STAGE_MAIN_MENU)
 
     def draw(self):
         self.screen.fill(BLACK)

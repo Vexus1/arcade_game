@@ -7,7 +7,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, screen):
         super().__init__()
         self.screen = screen
-        self.image = pygame.image.load('images/player.png').convert()
+        self.image = pygame.image.load('images/player.png').convert_alpha()
         self.rect = self.image.get_rect(midbottom=SCREENRECT.midbottom)
         self.max_x = SCREEN_WIDTH - self.rect.width
         self.max_y = SCREEN_HEIGHT - self.rect.height
