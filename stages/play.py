@@ -1,5 +1,6 @@
 from stages.stage import Stage
 from player import *
+from enemies import *
 
 STATE_PAUSE = 'pause'
 STATE_PLAYING = 'playing'
@@ -10,9 +11,10 @@ class Play(Stage):
         super().__init__(manager)
         self.screen = screen
         self.player = Player(self.screen)
-        self.enemy = self
+        self.enemy = Enemy(self.screen)
         self.all_sprites = pygame.sprite.Group()
         self.all_sprites.add(self.player)
+        self.all_sprites.add(self.enemy)
         self.background = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.playing_state = STATE_PLAYING
 

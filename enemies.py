@@ -6,4 +6,6 @@ class Enemy(pygame.sprite.Sprite):
         self.screen = screen
         self.image = pygame.image.load('images/enemy.png').convert()
         self.rect = self.image.get_rect()
+        self.rect.x = 220
+        self.rect.y = 220
 
