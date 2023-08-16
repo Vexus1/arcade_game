@@ -4,7 +4,7 @@ from stages.main_menu import *
 from stages.play import *
 from stages.high_score import *
 from stages.rules import *
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
 class StageMenager():
     def __init__(self):

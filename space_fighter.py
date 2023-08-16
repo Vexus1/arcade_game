@@ -27,5 +27,5 @@ while True:
     current_stage.get_current_stage().draw()
 
     pygame.display.update()
-
-    clock.tick(FPS)
+    
+    clock.tick(60)
