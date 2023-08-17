@@ -16,6 +16,7 @@ class Play(Stage):
                              Enemy(self.screen, (500, 200)), Enemy(self.screen, (700, 200)),
                              Enemy(self.screen, (900, 200)), Enemy(self.screen, (1100, 200)),
                              Enemy(self.screen, (1300, 200)), Enemy(self.screen, (1500, 200))]
+        self.enemies_hide_list = []
         self.enemies = pygame.sprite.Group()
         self.all_sprites = pygame.sprite.RenderUpdates()
         self.beams = pygame.sprite.Group()
@@ -30,9 +31,13 @@ class Play(Stage):
             self.enemies.add(enemy)
             self.all_sprites.add(enemy)
     
-    def reset_position(self):
+    def reset_sprites_position(self):
+        self.player.start_position()
         for enemy in self.enemies_list:
-            return
+            enemy.starting_position()
+        if self.beams:
+            for beam in self.beams:
+                beam.kill()
     
     def handle_inputs(self, events, key_pressed_list):
         if key_pressed_list[pygame.K_w]:
@@ -55,7 +60,7 @@ class Play(Stage):
         
         # Detect collisions between aliens and players.
         if pygame.sprite.spritecollideany(self.player, self.enemies):
-            self.player.start_position()
+            self.reset_sprites_position()
             self.manager.next_stage(STAGE_MAIN_MENU)
 
         for beam in self.beams:
@@ -64,6 +69,13 @@ class Play(Stage):
         if self.beams:
             for enemy in pygame.sprite.groupcollide(self.enemies, self.beams, False, True):
                 enemy.hide()
+                self.enemies_hide_list.append(enemy)
+        
+        if len(self.enemies_list) == len(self.enemies_hide_list):
+            self.enemies_hide_list = []
+            self.reset_sprites_position()
+            self.player.start_position()
+            self.manager.next_stage(STAGE_MAIN_MENU)
 
     def draw(self):
         self.screen.fill(BLACK)

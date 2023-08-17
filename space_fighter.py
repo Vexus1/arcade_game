@@ -18,7 +18,7 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-
+    
         events_list.append(event)
 
     # if curent_scene.next_scene():
@@ -27,5 +27,6 @@ while True:
     current_stage.get_current_stage().draw()
 
     pygame.display.update()
+    
     
     clock.tick(FPS)
