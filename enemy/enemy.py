@@ -10,8 +10,9 @@ class Enemy(pygame.sprite.Sprite):
         self.starting_position()
 
     def starting_position(self):
-        self.rect.x = self.set_position[0]
+        self.rect.centerx = self.set_position[0] 
         self.rect.y = self.set_position[1]
+        print(self.rect.x, self.rect.y)
 
     def hide(self):
         self.rect.x = -self.rect.width

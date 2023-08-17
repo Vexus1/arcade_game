@@ -7,18 +7,15 @@ STATE_PAUSE = 'pause'
 STATE_PLAYING = 'playing'
 STATE_GAME_OVER = 'game over'
 STAGE_DELAY = 2000
-ENEMIES_NUMBER = 8
+ENEMIES_NUMBER = 9
 
 class Play(Stage):
     def __init__(self, manager, screen):
         super().__init__(manager)
         self.screen = screen
         self.player = Player(self.screen)
-        # self.enemies_list = [Enemy(self.screen, (200, 200)), Enemy(self.screen, (400, 200)),
-        #                      Enemy(self.screen, (600, 200)), Enemy(self.screen, (800, 200)),
-        #                      Enemy(self.screen, (1000, 200)), Enemy(self.screen, (1200, 200)),
-        #                      Enemy(self.screen, (1400, 200)), Enemy(self.screen, (1600, 200))]
         self.enemies_list = []
+        self.enemy_formation()
         self.enemies_hide_list = []
         self.enemies = pygame.sprite.Group()
         self.all_sprites = pygame.sprite.RenderUpdates()
@@ -26,17 +23,17 @@ class Play(Stage):
         self.set_sprites() 
     
     def enemy_formation(self):
-        screen_width = self.screen.get_widht()
+        screen_width = self.screen.get_width()
         screen_height = self.screen.get_height()
         def formation_func(x):
             '''Reverse parabolic function'''
-            return -(1/screen_width)*x**2 + screen_height
+            return (1/(screen_height*2))*(x-screen_width/2)**2 
         
-        for enemy in range(ENEMIES_NUMBER+1):
-            x = enemy + 1 / screen_width
+        for enemy in range(ENEMIES_NUMBER):
+            x = (enemy + 1)/(ENEMIES_NUMBER+1) * screen_width
             enemy_position = (x, formation_func(x))
+            print(enemy_position)
             self.enemies_list.append(Enemy(self.screen, enemy_position))
-
 
     def get_stage(self):
         return STAGE_PLAY 
@@ -81,8 +78,8 @@ class Play(Stage):
     @level_starting_delay
     def update(self):
         # wykorzystać do pauzy
-        if self.playing_state != STATE_PLAYING:
-            return  
+        # if self.playing_state != STATE_PLAYING:
+        #     return  
 
         # Detect collisions between aliens and player.
         if pygame.sprite.spritecollideany(self.player, self.enemies):

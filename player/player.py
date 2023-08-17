@@ -18,7 +18,7 @@ class Player(pygame.sprite.Sprite):
         self.fire_delay = 0 # in milliseconds
     
     def starting_position(self):
-        self.rect.x = self.screen.get_width()//2 - self.rect.width//2
+        self.rect.centerx = self.screen.get_width()//2
         self.rect.y = self.screen.get_height() - self.rect.height
 
     def move(self, x, y):
@@ -33,17 +33,6 @@ class Player(pygame.sprite.Sprite):
         if self.rect.left > self.max_x:
             self.rect.left = self.max_x
 
-    # def fire_rate(func):
-    #     '''Shots per second'''
-    #     def inner(self):
-    #         print(pygame.time.get_ticks())
-    #         if self.time + self.fire_delay <= pygame.time.get_ticks():
-    #             print("chuj")
-    #             self.fire_delay = 1000/FIRERATE
-    #             self.time = pygame.time.get_ticks()
-    #             return func(self) 
-    #     return inner
-
     def fire_rate(self):
         if self.time + self.fire_delay <= pygame.time.get_ticks():
             self.fire_delay = 1000/FIRERATE
@@ -52,7 +41,6 @@ class Player(pygame.sprite.Sprite):
 
     def shoot(self):
         if self.fire_rate():
-            beam_position = (self.rect.x, self.rect.y)
+            beam_position = (self.rect.centerx, self.rect.y)
             beam = PlayerBeam(self.screen, beam_position)
-            print("cwel")
             return beam
