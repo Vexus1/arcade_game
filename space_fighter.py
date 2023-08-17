@@ -7,7 +7,7 @@ from stage_menager import *
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-pygame.init()
+pygame.init() 
 clock = pygame.time.Clock()
 current_stage = StageMenager()
 
@@ -20,13 +20,12 @@ while True:
             sys.exit()
     
         events_list.append(event)
-
+ 
     # if curent_scene.next_scene():
     current_stage.get_current_stage().handle_inputs(events_list, keys_pressed)
     current_stage.get_current_stage().update()
     current_stage.get_current_stage().draw()
 
     pygame.display.update()
-    
-    
+
     clock.tick(FPS)

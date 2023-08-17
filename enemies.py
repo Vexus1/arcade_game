@@ -16,4 +16,3 @@ class Enemy(pygame.sprite.Sprite):
     def hide(self):
         self.rect.x = -self.rect.width
         self.rect.y = -self.rect.height
-
