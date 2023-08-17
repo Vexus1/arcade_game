@@ -1,26 +1,42 @@
 from stages.stage import Stage
-from player import *
-from enemies import *
+from player.player import *
+from enemy.enemy import *
+from time import sleep
 
 STATE_PAUSE = 'pause'
 STATE_PLAYING = 'playing'
 STATE_GAME_OVER = 'game over'
+STAGE_DELAY = 2000
+ENEMIES_NUMBER = 8
 
 class Play(Stage):
     def __init__(self, manager, screen):
         super().__init__(manager)
         self.screen = screen
-        self.playing_state = STATE_PLAYING
         self.player = Player(self.screen)
-        self.enemies_list = [Enemy(self.screen, (100, 200)), Enemy(self.screen, (300, 200)),
-                             Enemy(self.screen, (500, 200)), Enemy(self.screen, (700, 200)),
-                             Enemy(self.screen, (900, 200)), Enemy(self.screen, (1100, 200)),
-                             Enemy(self.screen, (1300, 200)), Enemy(self.screen, (1500, 200))]
+        # self.enemies_list = [Enemy(self.screen, (200, 200)), Enemy(self.screen, (400, 200)),
+        #                      Enemy(self.screen, (600, 200)), Enemy(self.screen, (800, 200)),
+        #                      Enemy(self.screen, (1000, 200)), Enemy(self.screen, (1200, 200)),
+        #                      Enemy(self.screen, (1400, 200)), Enemy(self.screen, (1600, 200))]
+        self.enemies_list = []
         self.enemies_hide_list = []
         self.enemies = pygame.sprite.Group()
         self.all_sprites = pygame.sprite.RenderUpdates()
         self.beams = pygame.sprite.Group()
         self.set_sprites() 
+    
+    def enemy_formation(self):
+        screen_width = self.screen.get_widht()
+        screen_height = self.screen.get_height()
+        def formation_func(x):
+            '''Reverse parabolic function'''
+            return -(1/screen_width)*x**2 + screen_height
+        
+        for enemy in range(ENEMIES_NUMBER+1):
+            x = enemy + 1 / screen_width
+            enemy_position = (x, formation_func(x))
+            self.enemies_list.append(Enemy(self.screen, enemy_position))
+
 
     def get_stage(self):
         return STAGE_PLAY 
@@ -39,6 +55,14 @@ class Play(Stage):
             for beam in self.beams:
                 beam.kill()
     
+    def level_starting_delay(func):
+        """Delay at the start of the level in milliseconds"""
+        def inner(self, *kwargs, **args):
+            if pygame.time.get_ticks() >= STAGE_DELAY:
+                func(self, *kwargs, **args)
+        return inner
+
+    @level_starting_delay
     def handle_inputs(self, events, key_pressed_list):
         if key_pressed_list[pygame.K_w]:
             self.player.move(0,-1)
@@ -54,11 +78,12 @@ class Play(Stage):
                 self.beams.add(beam)
                 self.all_sprites.add(beam)
 
+    @level_starting_delay
     def update(self):
         # wykorzystać do pauzy
         if self.playing_state != STATE_PLAYING:
             return  
-        
+
         # Detect collisions between aliens and player.
         if pygame.sprite.spritecollideany(self.player, self.enemies):
             self.reset_sprites_position()
@@ -66,13 +91,13 @@ class Play(Stage):
 
         for beam in self.beams:
             beam.travel()
-        
+
         if self.beams:
-             # Detect collisions between enemy and player beam.
+                # Detect collisions between enemy and player beam.
             for enemy in pygame.sprite.groupcollide(self.enemies, self.beams, False, True):
                 enemy.hide()
                 self.enemies_hide_list.append(enemy)
-        
+
         if len(self.enemies_list) == len(self.enemies_hide_list):
             self.enemies_hide_list = []
             self.reset_sprites_position()

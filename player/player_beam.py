@@ -3,7 +3,7 @@ from constants import *
 import time
 
 SPEED = 10
-class Beam(pygame.sprite.Sprite):
+class PlayerBeam(pygame.sprite.Sprite):
     def __init__(self, screen, set_position: tuple):
         super().__init__()
         self.screen = screen

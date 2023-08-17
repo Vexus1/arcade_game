@@ -1,6 +1,6 @@
 import pygame
 from constants import *
-from beam import *
+from player.player_beam import *
 import time
 
 SPEED = 10
@@ -53,6 +53,6 @@ class Player(pygame.sprite.Sprite):
     def shoot(self):
         if self.fire_rate():
             beam_position = (self.rect.x, self.rect.y)
-            beam = Beam(self.screen, beam_position)
+            beam = PlayerBeam(self.screen, beam_position)
             print("cwel")
             return beam
