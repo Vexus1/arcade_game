@@ -1,7 +1,6 @@
 from stages.stage import Stage
 from player.player import *
 from enemy.enemy import *
-from time import sleep
 
 STATE_PAUSE = 'pause'
 STATE_PLAYING = 'playing'
@@ -15,11 +14,11 @@ class Play(Stage):
         self.screen = screen
         self.player = Player(self.screen)
         self.enemies_list = []
-        self.enemy_formation()
         self.enemies_hide_list = []
         self.enemies = pygame.sprite.Group()
         self.all_sprites = pygame.sprite.RenderUpdates()
         self.beams = pygame.sprite.Group()
+        self.enemy_formation()
         self.set_sprites() 
     
     def enemy_formation(self):
@@ -27,7 +26,7 @@ class Play(Stage):
         screen_height = self.screen.get_height()
         def formation_func(x):
             '''Reverse parabolic function'''
-            return (1/(screen_height*2))*(x-screen_width/2)**2 
+            return (1/(screen_height*2)) * (x - (screen_width)/2)**2 + screen_height/15
         
         for enemy in range(ENEMIES_NUMBER):
             x = (enemy + 1)/(ENEMIES_NUMBER+1) * screen_width
@@ -80,6 +79,10 @@ class Play(Stage):
         # wykorzystać do pauzy
         # if self.playing_state != STATE_PLAYING:
         #     return  
+
+        # Enemies movement
+        for enemy in self.enemies_list:
+            enemy.route()
 
         # Detect collisions between aliens and player.
         if pygame.sprite.spritecollideany(self.player, self.enemies):

@@ -4,7 +4,7 @@ from player.player_beam import *
 import time
 
 SPEED = 10
-FIRERATE = 5 # shoots per seocnd
+FIRERATE = 5 # shoots per second
 class Player(pygame.sprite.Sprite):
     def __init__(self, screen):
         super().__init__()
@@ -14,8 +14,8 @@ class Player(pygame.sprite.Sprite):
         self.starting_position()
         self.max_x = self.screen.get_width() - self.rect.width
         self.max_y = self.screen.get_height() - self.rect.height
-        self.time = 0
-        self.fire_delay = 0 # in milliseconds
+        self.time = 0           # in milliseconds
+        self.fire_delay = 0     # in milliseconds
     
     def starting_position(self):
         self.rect.centerx = self.screen.get_width()//2

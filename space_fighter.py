@@ -21,7 +21,6 @@ while True:
     
         events_list.append(event)
  
-    # if curent_scene.next_scene():
     current_stage.get_current_stage().handle_inputs(events_list, keys_pressed)
     current_stage.get_current_stage().update()
     current_stage.get_current_stage().draw()
