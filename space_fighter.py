@@ -11,6 +11,7 @@ pygame.init()
 clock = pygame.time.Clock()
 current_stage = StageMenager()
 
+
 while True:
     keys_pressed = pygame.key.get_pressed()
     events_list = []
@@ -18,7 +19,7 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-    
+
         events_list.append(event)
  
     current_stage.get_current_stage().handle_inputs(events_list, keys_pressed)

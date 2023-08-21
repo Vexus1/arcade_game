@@ -5,8 +5,8 @@ from enemy.enemy import *
 STATE_PAUSE = 'pause'
 STATE_PLAYING = 'playing'
 STATE_GAME_OVER = 'game over'
-STAGE_DELAY = 2000
 ENEMIES_NUMBER = 9
+STAGE_DELAY = 2000
 
 class Play(Stage):
     def __init__(self, manager, screen):
@@ -51,14 +51,14 @@ class Play(Stage):
             for beam in self.beams:
                 beam.kill()
     
-    def level_starting_delay(func):
-        """Delay at the start of the level in milliseconds"""
-        def inner(self, *kwargs, **args):
-            if pygame.time.get_ticks() >= STAGE_DELAY:
-                func(self, *kwargs, **args)
-        return inner
+    # def level_starting_delay(func):
+    #     """Delay at the start of the level in milliseconds"""
+    #     def inner(self, *kwargs, **args):
+    #         if pygame.time.get_ticks() >= STAGE_DELAY:
+    #             func(self, *kwargs, **args)
+    #     return inner
 
-    @level_starting_delay
+    # @level_starting_delay
     def handle_inputs(self, events, key_pressed_list):
         if key_pressed_list[pygame.K_w]:
             self.player.move(0,-1)
@@ -74,7 +74,7 @@ class Play(Stage):
                 self.beams.add(beam)
                 self.all_sprites.add(beam)
 
-    @level_starting_delay
+    # @level_starting_delay
     def update(self):
         # wykorzystać do pauzy
         # if self.playing_state != STATE_PLAYING:
