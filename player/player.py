@@ -3,7 +3,7 @@ from constants import *
 from player.player_beam import *
 import time
 
-SPEED = 10
+MOVEMENT_SPEED = 10
 FIRERATE = 5 # shoots per second
 class Player(pygame.sprite.Sprite):
     def __init__(self, screen):
@@ -23,7 +23,7 @@ class Player(pygame.sprite.Sprite):
 
     def move(self, x, y):
         '''Method that handle players moves (WASD) limits area (window size) to move for player sprite'''
-        self.rect.move_ip(x*SPEED, y*SPEED)
+        self.rect.move_ip(x*MOVEMENT_SPEED, y*MOVEMENT_SPEED)
         if self.rect.top < 0:
             self.rect.top = 0
         if self.rect.top > self.max_y:

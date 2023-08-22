@@ -3,13 +3,13 @@ import os
 import sys
 
 from constants import *
-from stage_menager import *
+from scene_manager import *
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 pygame.init() 
 clock = pygame.time.Clock()
-current_stage = StageMenager()
+current_scene = SceneManager()
 
 while True:
     keys_pressed = pygame.key.get_pressed()
@@ -21,9 +21,9 @@ while True:
 
         events_list.append(event)
  
-    current_stage.get_current_stage().handle_inputs(events_list, keys_pressed)
-    current_stage.get_current_stage().update()
-    current_stage.get_current_stage().draw()
+    current_scene.get_current_scene().handle_inputs(events_list, keys_pressed)
+    current_scene.get_current_scene().update()
+    current_scene.get_current_scene().draw()
 
     pygame.display.update()
 

@@ -1,5 +1,6 @@
 import pygame
 from constants import *
+import random
 
 SPEED = 5
 class EnemyBeam(pygame.sprite.Sprite):

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class Stage(ABC):
+class Scene(ABC):
     @abstractmethod
     def __init__(self, manager):
         self.manager = manager
@@ -17,6 +17,6 @@ class Stage(ABC):
         raise NotImplementedError
     
     @abstractmethod
-    def get_stage(self):
+    def get_scene(self):
         raise NotImplementedError
     

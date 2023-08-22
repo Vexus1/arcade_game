@@ -1,23 +1,23 @@
-from stages.stage import Stage
+from scenes.scene import Scene
 from constants import *
 from graphic_tools import TextButton
 import pygame
 import sys
 
-class MainMenu(Stage):
+class MainMenu(Scene):
     def __init__(self, manager, screen):
         super().__init__(manager)
         self.screen = screen
-        self.start_button = TextButton(self.screen, 'Start', (500, 100), STAGE_PLAY)
-        self.high_score_button = TextButton(self.screen, 'High Score', (500, 200), STAGE_HIGH_SCORE)
-        self.rules_button = TextButton(self.screen, 'Rules', (500, 300), STAGE_RULES)
+        self.start_button = TextButton(self.screen, 'Start', (500, 100), SCENE_PLAY)
+        self.high_score_button = TextButton(self.screen, 'High Score', (500, 200), SCENE_HIGH_SCORE)
+        self.rules_button = TextButton(self.screen, 'Rules', (500, 300), SCENE_RULES)
         self.quit_button = TextButton(self.screen, 'Quit', (500, 400))
         self.buttons_list = [self.start_button, self.high_score_button,
                              self.rules_button, self.quit_button]
         self.button_number = 0
     
-    def get_stage(self):
-        return STAGE_MAIN_MENU
+    def get_scene(self):
+        return SCENE_MAIN_MENU
 
     def handle_inputs(self, events, key_pressed_list):
 
@@ -39,7 +39,7 @@ class MainMenu(Stage):
                     if self.button_number == len(self.buttons_list)-1:
                         pygame.quit()
                         sys.exit()
-                    self.manager.next_stage(self.buttons_list[self.button_number].stage_reference())
+                    self.manager.next_scene(self.buttons_list[self.button_number].scene_reference())
         
     def draw(self):
         self.screen.fill(BLACK)

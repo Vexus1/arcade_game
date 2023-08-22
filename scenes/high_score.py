@@ -1,6 +1,6 @@
-from stages.stage import Stage
+from scenes.scene import Scene
 
-class HighScore(Stage):
+class HighScore(Scene):
     def __init__(self, manager, screen):
         super().__init__(manager)
         self.screen = screen

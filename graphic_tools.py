@@ -2,14 +2,14 @@ from constants import *
 import pygame
 
 class TextButton():
-    def __init__(self, screen, text, loc: tuple, stage=None, font='Arial', size=20, color=WHITE):
+    def __init__(self, screen, text, loc: tuple, scene=None, font='Arial', size=20, color=WHITE):
         self.screen = screen
         self.loc = loc
         self.font = pygame.font.SysFont(font, size)
         self.text = None
         self.color = color
         self.set_text(text)
-        self.stage = stage
+        self.scene = scene
 
     def set_text(self, new_text):
         if self.text == new_text:
@@ -27,8 +27,8 @@ class TextButton():
     def unselected(self):
         self.text_surface = self.font.render(self.text, True, WHITE)
     
-    def stage_reference(self):
-        return self.stage
+    def scene_reference(self):
+        return self.scene
    
 
 class Image():

@@ -1,7 +1,7 @@
 import pygame
 from math import floor
 
-MOVEMENT_SPEED = 0.5
+MOVEMENT_SPEED = 1
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, screen, set_position: tuple):
@@ -27,7 +27,7 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.y = -self.rect.height
 
     def velocity(self):
-        if MOVEMENT_SPEED >= 1:
+        if isinstance(MOVEMENT_SPEED, int):
             return MOVEMENT_SPEED
         if self.movement_speed < 1:
             self.movement_speed += MOVEMENT_SPEED
@@ -40,8 +40,8 @@ class Enemy(pygame.sprite.Sprite):
     def route(self):
         '''Enemy route through Ox axis (10% of current window width)'''
         if not self.hidden:
-            max_left_route = self.set_position[0] - self.screen.get_width()//10
-            max_right_route = self.set_position[0] + self.screen.get_width()//10
+            max_left_route = self.set_position[0] - self.screen.get_width()//20
+            max_right_route = self.set_position[0] + self.screen.get_width()//20
             if self.rect.centerx >= max_left_route and self.max_left_reached is False:
                 self.rect.centerx -= self.velocity()
                 if self.rect.centerx <= max_left_route:

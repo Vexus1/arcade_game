@@ -1,4 +1,4 @@
-from stages.stage import Stage
+from scenes.scene import Scene
 from player.player import *
 from enemy.enemy import *
 
@@ -6,9 +6,9 @@ STATE_PAUSE = 'pause'
 STATE_PLAYING = 'playing'
 STATE_GAME_OVER = 'game over'
 ENEMIES_NUMBER = 9
-STAGE_DELAY = 2000
+SCENE_DELAY = 2000
 
-class Play(Stage):
+class Play(Scene):
     def __init__(self, manager, screen):
         super().__init__(manager)
         self.screen = screen
@@ -20,6 +20,7 @@ class Play(Stage):
         self.beams = pygame.sprite.Group()
         self.enemy_formation()
         self.set_sprites() 
+        self.scene_delay = pygame.time.get_ticks() + SCENE_DELAY
     
     def enemy_formation(self):
         screen_width = self.screen.get_width()
@@ -34,8 +35,8 @@ class Play(Stage):
             print(enemy_position)
             self.enemies_list.append(Enemy(self.screen, enemy_position))
 
-    def get_stage(self):
-        return STAGE_PLAY 
+    def get_scene(self):
+        return SCENE_PLAY 
     
     def set_sprites(self):
         self.all_sprites.add(self.player)
@@ -51,14 +52,14 @@ class Play(Stage):
             for beam in self.beams:
                 beam.kill()
     
-    # def level_starting_delay(func):
-    #     """Delay at the start of the level in milliseconds"""
-    #     def inner(self, *kwargs, **args):
-    #         if pygame.time.get_ticks() >= STAGE_DELAY:
-    #             func(self, *kwargs, **args)
-    #     return inner
+    def level_starting_delay(func):
+        """Delay at the start of the level in milliseconds"""
+        def inner(self, *kwargs, **args):
+            if pygame.time.get_ticks() >= self.scene_delay:
+                func(self, *kwargs, **args)
+        return inner
 
-    # @level_starting_delay
+    @level_starting_delay
     def handle_inputs(self, events, key_pressed_list):
         if key_pressed_list[pygame.K_w]:
             self.player.move(0,-1)
@@ -74,7 +75,7 @@ class Play(Stage):
                 self.beams.add(beam)
                 self.all_sprites.add(beam)
 
-    # @level_starting_delay
+    @level_starting_delay
     def update(self):
         # wykorzystać do pauzy
         # if self.playing_state != STATE_PLAYING:
@@ -87,7 +88,7 @@ class Play(Stage):
         # Detect collisions between aliens and player.
         if pygame.sprite.spritecollideany(self.player, self.enemies):
             self.reset_sprites_position()
-            self.manager.next_stage(STAGE_MAIN_MENU)
+            self.manager.next_scene(SCENE_MAIN_MENU)
 
         for beam in self.beams:
             beam.travel()
@@ -101,7 +102,7 @@ class Play(Stage):
         if len(self.enemies_list) == len(self.enemies_hide_list):
             self.enemies_hide_list = []
             self.reset_sprites_position()
-            self.manager.next_stage(STAGE_MAIN_MENU)
+            self.manager.next_scene(SCENE_MAIN_MENU)
 
     def draw(self):
         self.screen.fill(BLACK)
