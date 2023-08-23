@@ -16,5 +16,9 @@ class Scene(ABC):
     def draw(self):
         raise NotImplementedError
     
-    # def
+    def on_enter(self):
+        pass
+
+    def on_exit(self):
+        pass
     

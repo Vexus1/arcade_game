@@ -34,14 +34,14 @@ class Player(pygame.sprite.Sprite):
         if self.rect.left > self.max_x:
             self.rect.left = self.max_x
 
-    def fire_rate(self):
+    def _fire_rate(self):
         if self.time + self.fire_delay <= pygame.time.get_ticks():
             self.fire_delay = 1000/FIRERATE
             self.time = pygame.time.get_ticks()
             return True
 
     def shoot(self):
-        if self.fire_rate():
+        if self._fire_rate():
             beam_position = (self.rect.centerx, self.rect.y)
             beam = PlayerBeam(self.screen, beam_position)
             return beam

@@ -1,8 +1,7 @@
 import pygame
 from constants import *
-import random
 
-SPEED = 5
+SPEED = 2
 class EnemyBeam(pygame.sprite.Sprite):
     def __init__(self, screen, set_position: tuple):
         super().__init__()

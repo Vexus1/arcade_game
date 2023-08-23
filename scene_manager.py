@@ -6,10 +6,10 @@ from scenes.play import Play
 from scenes.high_score import HighScore
 from scenes.rules import Rules
 
+screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+
 class SceneError(Exception):
     pass
-
-screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
 class SceneManager():
     def __init__(self):
@@ -20,7 +20,6 @@ class SceneManager():
         pass
     
     def next_scene(self, next_scene):
-        del self.current_scene
         if next_scene == SCENE_MAIN_MENU:
             self.current_scene = MainMenu(self, screen)
         elif next_scene == SCENE_PLAY:

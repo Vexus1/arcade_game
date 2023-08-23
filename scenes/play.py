@@ -73,6 +73,10 @@ class Play(Scene):
         # Enemies movement
         for enemy in self.enemies_list:
             enemy.route()
+            beam = enemy.shoot()
+            if beam:
+                self.beams.add(beam)
+                self.all_sprites.add(beam)
 
         # Detect collisions between aliens and player.
         if pygame.sprite.spritecollideany(self.player, self.enemies):
