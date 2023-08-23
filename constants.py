@@ -5,11 +5,13 @@ import pygame
 # SCREENRECT = pygame.Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
 FPS = 60
 
-SCENE_MAIN_MENU = 'stage main menu'
-SCENE_PLAY = 'stage play'
-SCENE_HIGH_SCORE = 'stage high score'
-SCENE_RULES = 'stage rules'
-SCENE_PAUSE = 'stage pause'
+
+SCENE_MAIN_MENU = 'scene main menu'
+SCENE_PLAY = 'scene play'
+SCENE_HIGH_SCORE = 'scene high score'
+SCENE_RULES = 'scene rules'
+SCENE_PAUSE = 'scene pause'
+scenes_list = []
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)

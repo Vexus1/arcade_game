@@ -16,7 +16,5 @@ class Scene(ABC):
     def draw(self):
         raise NotImplementedError
     
-    @abstractmethod
-    def get_scene(self):
-        raise NotImplementedError
+    # def
     

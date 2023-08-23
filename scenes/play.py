@@ -14,7 +14,6 @@ class Play(Scene):
         self.screen = screen
         self.player = Player(self.screen)
         self.enemies_list = []
-        self.enemies_hide_list = []
         self.enemies = pygame.sprite.Group()
         self.all_sprites = pygame.sprite.RenderUpdates()
         self.beams = pygame.sprite.Group()
@@ -35,22 +34,12 @@ class Play(Scene):
             print(enemy_position)
             self.enemies_list.append(Enemy(self.screen, enemy_position))
 
-    def get_scene(self):
-        return SCENE_PLAY 
     
     def set_sprites(self):
         self.all_sprites.add(self.player)
         for enemy in self.enemies_list:
             self.enemies.add(enemy)
             self.all_sprites.add(enemy)
-    
-    def reset_sprites_position(self):
-        self.player.starting_position()
-        for enemy in self.enemies_list:
-            enemy.starting_position()
-        if self.beams:
-            for beam in self.beams:
-                beam.kill()
     
     def level_starting_delay(func):
         """Delay at the start of the level in milliseconds"""
@@ -87,21 +76,19 @@ class Play(Scene):
 
         # Detect collisions between aliens and player.
         if pygame.sprite.spritecollideany(self.player, self.enemies):
-            self.reset_sprites_position()
             self.manager.next_scene(SCENE_MAIN_MENU)
 
         for beam in self.beams:
             beam.travel()
 
         if self.beams:
-                # Detect collisions between enemy and player beam.
-            for enemy in pygame.sprite.groupcollide(self.enemies, self.beams, False, True):
-                enemy.hide()
-                self.enemies_hide_list.append(enemy)
-
-        if len(self.enemies_list) == len(self.enemies_hide_list):
-            self.enemies_hide_list = []
-            self.reset_sprites_position()
+            # Detect collisions between enemy and player beam.
+            pygame.sprite.groupcollide(self.enemies, self.beams, True, True)
+            # use when sounds will be upload
+            # for enemy in pygame.sprite.groupcollide(self.enemies, self.beams, True, True):
+                # enemy_kill.play()
+    
+        if not self.enemies:
             self.manager.next_scene(SCENE_MAIN_MENU)
 
     def draw(self):

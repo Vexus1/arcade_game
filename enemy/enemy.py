@@ -14,17 +14,10 @@ class Enemy(pygame.sprite.Sprite):
         self.surf = pygame.image.load('images/enemy.png').convert_alpha()
         self.rect = self.surf.get_rect()
         self.starting_position()
-        self.hidden = False
 
     def starting_position(self):
-        self.hidden = False
         self.rect.centerx = self.set_position[0] 
         self.rect.y = self.set_position[1]
-
-    def hide(self):
-        self.hidden = True
-        self.rect.x = -self.rect.width
-        self.rect.y = -self.rect.height
 
     def velocity(self):
         if isinstance(MOVEMENT_SPEED, int):
@@ -39,15 +32,14 @@ class Enemy(pygame.sprite.Sprite):
 
     def route(self):
         '''Enemy route through Ox axis (10% of current window width)'''
-        if not self.hidden:
-            max_left_route = self.set_position[0] - self.screen.get_width()//20
-            max_right_route = self.set_position[0] + self.screen.get_width()//20
-            if self.rect.centerx >= max_left_route and self.max_left_reached is False:
-                self.rect.centerx -= self.velocity()
-                if self.rect.centerx <= max_left_route:
-                    self.max_left_reached, self.max_right_route = True, False
-            elif self.rect.centerx <= max_right_route and self.max_right_reached is False:
-                self.rect.centerx += self.velocity()
-                if self.rect.centerx >= max_right_route:
-                    self.max_left_reached, self.max_right_route = False, True
+        max_left_route = self.set_position[0] - self.screen.get_width()//20
+        max_right_route = self.set_position[0] + self.screen.get_width()//20
+        if self.rect.centerx >= max_left_route and self.max_left_reached is False:
+            self.rect.centerx -= self.velocity()
+            if self.rect.centerx <= max_left_route:
+                self.max_left_reached, self.max_right_route = True, False
+        elif self.rect.centerx <= max_right_route and self.max_right_reached is False:
+            self.rect.centerx += self.velocity()
+            if self.rect.centerx >= max_right_route:
+                self.max_left_reached, self.max_right_route = False, True
                     

@@ -15,12 +15,8 @@ class MainMenu(Scene):
         self.buttons_list = [self.start_button, self.high_score_button,
                              self.rules_button, self.quit_button]
         self.button_number = 0
-    
-    def get_scene(self):
-        return SCENE_MAIN_MENU
 
     def handle_inputs(self, events, key_pressed_list):
-
         for button in self.buttons_list:
             button.unselected()
         self.buttons_list[self.button_number].selected()

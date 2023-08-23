@@ -5,6 +5,7 @@ import time
 
 MOVEMENT_SPEED = 10
 FIRERATE = 5 # shoots per second
+
 class Player(pygame.sprite.Sprite):
     def __init__(self, screen):
         super().__init__()
