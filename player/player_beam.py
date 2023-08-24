@@ -15,3 +15,7 @@ class PlayerBeam(pygame.sprite.Sprite):
         self.rect.y -= SPEED
         if self.rect.top <= 0:
             self.kill()
+
+    def update(self):
+        self.travel()
+        

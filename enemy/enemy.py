@@ -6,7 +6,7 @@ from random import randint
 
 MOVEMENT_SPEED = 1
 BEAM_SPEED = 2
-RANDOM_FIRERATE = (0.25, 1) # minimum and maximum shoots per second
+RANDOM_FIRERATE = (0.125, 1) # minimum and maximum shoots per second
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, screen, set_position: tuple):
@@ -53,6 +53,9 @@ class Enemy(pygame.sprite.Sprite):
             beam = EnemyBeam(self.screen, beam_position)
             return beam
         
+    def update(self):
+        self.route()
+        
 
 class EnemyBeam(pygame.sprite.Sprite):
     def __init__(self, screen, set_position: tuple):
@@ -66,3 +69,6 @@ class EnemyBeam(pygame.sprite.Sprite):
         self.rect.y += BEAM_SPEED
         if self.rect.bottom <= 0:
             self.kill()
+
+    def update(self):
+        self.travel()

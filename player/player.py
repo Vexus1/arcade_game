@@ -1,3 +1,4 @@
+from typing import Any
 import pygame
 from constants import *
 from player.player_beam import *
@@ -45,3 +46,6 @@ class Player(pygame.sprite.Sprite):
             beam_position = (self.rect.centerx, self.rect.y)
             beam = PlayerBeam(self.screen, beam_position)
             return beam
+    
+    def update(self):
+        pass

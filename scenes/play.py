@@ -68,22 +68,23 @@ class Play(Scene):
         # if self.playing_state != STATE_PLAYING:
         #     return  
 
-        # Te 3 pętle do przyszłej optymalizacji!!!
+       
         # player beams travel
-        for beam in self.player_beams:
-            beam.travel()
+        # for beam in self.player_beams:
+        #     beam.travel()
 
         # Enemies movement and beams sprite
+        # do przyszłej optymalizacji!!!
         for enemy in self.enemies:
-            enemy.route()
             beam = enemy.shoot()
             if beam:
                 self.enemies_beams.add(beam)
                 self.all_sprites.add(beam)
 
+        self.all_sprites.update()
         # Enemies beams travel
-        for beam in self.enemies_beams:
-            beam.travel()
+        # for beam in self.enemies_beams:
+        #     beam.travel()
 
         # Detect collisions between aliens and player.
         if pygame.sprite.spritecollideany(self.player, self.enemies):
