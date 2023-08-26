@@ -2,7 +2,7 @@ import pygame
 from constants import *
 import time
 
-SPEED = 20
+SPEED = 10
 class PlayerBeam(pygame.sprite.Sprite):
     def __init__(self, screen, set_position: tuple):
         super().__init__()
@@ -10,6 +10,7 @@ class PlayerBeam(pygame.sprite.Sprite):
         self.surf = pygame.Surface((4,20))
         self.surf.fill(BLUE)
         self.rect = self.surf.get_rect(topleft=set_position)
+        self.mask = pygame.mask.from_surface(self.surf)
 
     def travel(self):
         self.rect.y -= SPEED

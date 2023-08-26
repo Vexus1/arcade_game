@@ -5,7 +5,7 @@ import sys
 from constants import *
 from scene_manager import *
 
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
+os.chdir(os.path.dirname(os.path.abspath(__file__))) 
 
 pygame.init() 
 clock = pygame.time.Clock()
@@ -18,7 +18,7 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-            sys.exit()
+            sys.exit() 
 
         events_list.append(event)
  
