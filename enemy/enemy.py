@@ -20,6 +20,7 @@ class Enemy(pygame.sprite.Sprite):
         self.surf = pygame.image.load('images/enemy.png').convert_alpha()
         self.rect = self.surf.get_rect()
         self.starting_position()
+        self.mask = pygame.mask.from_surface(self.surf)
 
     def starting_position(self):
         self.rect.centerx = self.set_position[0] 
@@ -64,6 +65,7 @@ class EnemyBeam(pygame.sprite.Sprite):
         self.surf = pygame.Surface((4,20))
         self.surf.fill(RED)
         self.rect = self.surf.get_rect(topleft=set_position)
+        self.mask = pygame.mask.from_surface(self.surf)
 
     def travel(self):
         self.rect.y += BEAM_SPEED

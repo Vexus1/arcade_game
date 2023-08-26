@@ -10,6 +10,7 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 pygame.init() 
 clock = pygame.time.Clock()
 current_scene = SceneManager()
+pygame.mouse.set_visible(False)
 
 while True:
     keys_pressed = pygame.key.get_pressed()

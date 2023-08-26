@@ -14,6 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.surf = pygame.image.load('images/player.png').convert_alpha()
         self.rect = self.surf.get_rect()
         self.starting_position()
+        self.mask = pygame.mask.from_surface(self.surf)
         self.max_x = self.screen.get_width() - self.rect.width
         self.max_y = self.screen.get_height() - self.rect.height
         self.time = 0           # in milliseconds
