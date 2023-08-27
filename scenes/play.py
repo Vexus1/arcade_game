@@ -17,6 +17,7 @@ class Play(Scene):
         self.enemy_formation()
         self.set_sprites() 
         self.scene_delay = pygame.time.get_ticks() + SCENE_DELAY
+        self.beam = False
 
     def level_starting_delay(func):
         """Delay at the start of the level in milliseconds"""
@@ -55,16 +56,18 @@ class Play(Scene):
         elif key_pressed_list[pygame.K_d]:
             self.player.move(1,0)
         if key_pressed_list[pygame.K_SPACE]:
-            beam = self.player.shoot()
-            if beam:
-                self.player_beams.add(beam)
-                self.all_sprites.add(beam)
+            self.beam = self.player.shoot()
 
     @level_starting_delay
     def update(self, dt):
         # use to pause the game
         # if self.playing_state != STATE_PLAYING:
         #     return  
+
+        # player beams
+        if self.beam:
+            self.player_beams.add(self.beam)
+            self.all_sprites.add(self.beam)
 
         # enemies beam 
         for enemy in self.enemies:
@@ -74,7 +77,7 @@ class Play(Scene):
                 self.all_sprites.add(beam)
 
         # update all the sprites
-        self.all_sprites.update()
+        self.all_sprites.update(dt)
 
         # Detect collisions between aliens and player.
         if pygame.sprite.spritecollideany(self.player, self.enemies, pygame.sprite.collide_mask):

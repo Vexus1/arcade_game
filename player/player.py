@@ -4,7 +4,6 @@ from constants import *
 from player.player_beam import *
 import time
 
-MOVEMENT_SPEED = 10
 FIRERATE = 5 # shoots per second
 
 class Player(pygame.sprite.Sprite):
@@ -17,8 +16,11 @@ class Player(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.surf)
         self.max_x = self.screen.get_width() - self.rect.width
         self.max_y = self.screen.get_height() - self.rect.height
+        self.position = pygame.math.Vector2(self.rect.topleft)
         self.time = 0           # in milliseconds
         self.fire_delay = 0     # in milliseconds
+        self.dt = 0
+        self.movement_speed = self.screen.get_width()//3 # pixels per second
     
     def starting_position(self):
         self.rect.centerx = self.screen.get_width()//2
@@ -26,7 +28,11 @@ class Player(pygame.sprite.Sprite):
 
     def move(self, x, y):
         '''Method that handle players moves (WASD) limits area (window size) to move for player sprite'''
-        self.rect.move_ip(x*MOVEMENT_SPEED, y*MOVEMENT_SPEED)
+        # self.rect.move_ip(x*MOVEMENT_SPEED, y*MOVEMENT_SPEED)
+        self.position.x += x * self.movement_speed * self.dt
+        self.rect.x = round(self.position.x)
+        self.position.y += y * self.movement_speed * self.dt
+        self.rect.y = round(self.position.y)
         if self.rect.top < 0:
             self.rect.top = 0
         if self.rect.top > self.max_y:
@@ -48,5 +54,5 @@ class Player(pygame.sprite.Sprite):
             beam = PlayerBeam(self.screen, beam_position)
             return beam
     
-    def update(self):
-        pass
+    def update(self, dt):
+        self.dt = dt

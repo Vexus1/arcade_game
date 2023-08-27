@@ -9,7 +9,7 @@ class Scene(ABC):
     def handle_inputs(self, events, keys_pressed):
         raise NotImplementedError
     
-    def update(self):
+    def update(self, dt):
         pass
 
     @abstractmethod

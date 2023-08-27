@@ -27,8 +27,8 @@ while True:
 
         events_list.append(event) 
  
-    current_scene.get_current_scene().handle_inputs(events_list, keys_pressed)
     current_scene.get_current_scene().update(dt)
+    current_scene.get_current_scene().handle_inputs(events_list, keys_pressed)
     current_scene.get_current_scene().draw()
 
     pygame.display.update()
