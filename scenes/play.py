@@ -2,9 +2,6 @@ from scenes.scene import Scene
 from player.player import *
 from enemy.enemy import *
 
-STATE_PAUSE = 'pause'
-STATE_PLAYING = 'playing'
-STATE_GAME_OVER = 'game over'
 ENEMIES_NUMBER = 9
 
 class Play(Scene):
@@ -46,6 +43,7 @@ class Play(Scene):
             self.enemies.add(enemy)
             self.all_sprites.add(enemy)
     
+    # Zastanowić się czy nie przenieść wykrywania przycisków strikte do player
     @level_starting_delay
     def handle_inputs(self, events, key_pressed_list):
         if key_pressed_list[pygame.K_w]:
@@ -63,28 +61,20 @@ class Play(Scene):
                 self.all_sprites.add(beam)
 
     @level_starting_delay
-    def update(self):
-        # wykorzystać do pauzy
+    def update(self, dt):
+        # use to pause the game
         # if self.playing_state != STATE_PLAYING:
         #     return  
 
-       
-        # player beams travel
-        # for beam in self.player_beams:
-        #     beam.travel()
-
-        # Enemies movement and beams sprite
-        # do przyszłej optymalizacji!!!
+        # enemies beam 
         for enemy in self.enemies:
             beam = enemy.shoot()
             if beam:
                 self.enemies_beams.add(beam)
                 self.all_sprites.add(beam)
 
+        # update all the sprites
         self.all_sprites.update()
-        # Enemies beams travel
-        # for beam in self.enemies_beams:
-        #     beam.travel()
 
         # Detect collisions between aliens and player.
         if pygame.sprite.spritecollideany(self.player, self.enemies, pygame.sprite.collide_mask):
@@ -102,7 +92,6 @@ class Play(Scene):
             if pygame.sprite.spritecollideany(self.player, self.enemies_beams, pygame.sprite.collide_mask):
                 self.player.kill()
                 self.manager.next_scene(SCENE_MAIN_MENU)
-            
 
         # Go to next stage if all enemies are killed
         if not self.enemies:

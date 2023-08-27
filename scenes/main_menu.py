@@ -8,12 +8,17 @@ class MainMenu(Scene):
     def __init__(self, manager, screen):
         super().__init__(manager)
         self.screen = screen
-        self.start_button = TextButton(self.screen, 'Start', (500, 100), SCENE_PLAY)
-        self.high_score_button = TextButton(self.screen, 'High Score', (500, 200), SCENE_HIGH_SCORE)
-        self.rules_button = TextButton(self.screen, 'Rules', (500, 300), SCENE_RULES)
-        self.quit_button = TextButton(self.screen, 'Quit', (500, 400))
-        self.buttons_list = [self.start_button, self.high_score_button,
-                             self.rules_button, self.quit_button]
+        screen_width = self.screen.get_width()
+        screen_height = self.screen.get_height()
+        self.start_button = TextButton(self.screen, 'Start', 
+                                       (screen_width//2, screen_height*3/10), SCENE_PLAY)
+        self.high_score_button = TextButton(self.screen, 'High Score',
+                                            (screen_width//2, screen_height*4/10), SCENE_HIGH_SCORE)
+        self.rules_button = TextButton(self.screen, 'Rules',
+                                       (screen_width//2, screen_height*5/10), SCENE_RULES)
+        self.quit_button = TextButton(self.screen, 'Quit',
+                                      (screen_width//2, screen_height*6/10))
+        self.buttons_list = [self.start_button, self.high_score_button, self.rules_button, self.quit_button]
         self.button_number = 0
 
     def handle_inputs(self, events, key_pressed_list):

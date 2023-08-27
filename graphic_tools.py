@@ -1,6 +1,7 @@
 from constants import * 
 import pygame
 
+# Need rework!!
 class TextButton():
     def __init__(self, screen, text, loc: tuple, scene=None, font='Arial', size=20, color=WHITE):
         self.screen = screen
@@ -17,9 +18,10 @@ class TextButton():
         
         self.text = new_text
         self.text_surface = self.font.render(self.text, True, self.color)
+        self.text_rect = self.text_surface.get_rect(center=self.loc)
 
     def draw(self):
-        self.screen.blit(self.text_surface, self.loc)
+        self.screen.blit(self.text_surface, self.text_rect)
 
     def selected(self):
         self.text_surface = self.font.render(self.text, True, RED)
