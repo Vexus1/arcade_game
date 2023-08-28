@@ -5,12 +5,12 @@ import pygame
 # SCREENRECT = pygame.Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)
 FPS = 144
 
-SCENE_DELAY = 2000
+SCENE_DELAY = 1000
 
 SCENE_MAIN_MENU = 'scene main menu'
 SCENE_PLAY = 'scene play'
-SCENE_HIGH_SCORE = 'scene high score'
-SCENE_RULES = 'scene rules'
+SCENE_LEVEL_SECECT = 'scene level select'
+SCENE_OPTIONS = 'scene options'
 SCENE_PAUSE = 'scene pause'
 
 WHITE = (255, 255, 255)

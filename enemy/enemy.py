@@ -16,13 +16,13 @@ class Enemy(pygame.sprite.Sprite):
         self.time = pygame.time.get_ticks()
         self.random_fire_delay()
         self.surf = pygame.image.load('images/enemy.png').convert_alpha()
+        self.surf = pygame.transform.scale(self.surf, (self.screen.get_width()//30, self.screen.get_height()//15))
         self.rect = self.surf.get_rect()
         self.starting_position()
         self.position = self.rect.centerx
         self.mask = pygame.mask.from_surface(self.surf)
         self.movement_speed = self.screen.get_width()//15
         self.dt = 0
-
 
     def starting_position(self):
         self.rect.centerx = self.set_position[0] 

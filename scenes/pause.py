@@ -1,5 +1,5 @@
-from stage import Stage
+from scene import Scene
 
-class Pause(Stage):
+class Pause(Scene):
     def __init__(self):
         pass

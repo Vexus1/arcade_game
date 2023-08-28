@@ -1,6 +1,7 @@
 from scenes.scene import Scene
 from player.player import *
 from enemy.enemy import *
+# from transition_scene import FadeTransitionScene
 
 ENEMIES_NUMBER = 9
 
@@ -8,6 +9,7 @@ class Play(Scene):
     def __init__(self, manager, screen):
         super().__init__(manager)
         self.screen = screen
+        self.background = pygame.image.load('images/Space-Background-Images.jpg')
         self.player = Player(self.screen)
         self.enemies_list = []
         self.all_sprites = pygame.sprite.RenderUpdates()
@@ -44,7 +46,6 @@ class Play(Scene):
             self.enemies.add(enemy)
             self.all_sprites.add(enemy)
     
-    # Zastanowić się czy nie przenieść wykrywania przycisków strikte do player
     @level_starting_delay
     def handle_inputs(self, events, key_pressed_list):
         if key_pressed_list[pygame.K_w]:
@@ -101,6 +102,7 @@ class Play(Scene):
             self.manager.next_scene(SCENE_MAIN_MENU)
 
     def draw(self):
-        self.screen.fill(BLACK)
+        self.screen.blit(self.background, (0, 0))
+        self.screen.set_alpha(100)
         for entity in self.all_sprites:
             self.screen.blit(entity.surf, entity.rect)

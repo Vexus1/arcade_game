@@ -3,8 +3,9 @@ import pygame
 from constants import *
 from scenes.main_menu import MainMenu
 from scenes.play import Play
-from scenes.high_score import HighScore
-from scenes.rules import Rules
+from scenes.level_select import HighScore
+from scenes.options import Rules
+from scenes.transition_scene import Fader
 
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
@@ -13,7 +14,7 @@ class SceneError(Exception):
 
 class SceneManager():
     def __init__(self):
-        self.current_scene = MainMenu(self, screen)
+        self.current_scene = Fader(screen, [MainMenu(self, screen)])
 
     def get_scene_names(self):
         '''Method implemented in future when there will be to many scenes'''
@@ -21,12 +22,12 @@ class SceneManager():
     
     def next_scene(self, next_scene):
         if next_scene == SCENE_MAIN_MENU:
-            self.current_scene = MainMenu(self, screen)
+            self.current_scene = Fader(screen, [self.current_scene, MainMenu(self, screen)]) 
         elif next_scene == SCENE_PLAY:
-            self.current_scene = Play(self, screen)
-        elif next_scene == SCENE_HIGH_SCORE:
+            self.current_scene = Fader(screen, [self.current_scene, Play(self, screen)]) 
+        elif next_scene == SCENE_LEVEL_SECECT:
             self.current_scene = HighScore(self, screen)
-        elif next_scene == SCENE_RULES:
+        elif next_scene == SCENE_OPTIONS:
             self.current_scene = Rules(self, screen)
         elif next_scene == SCENE_PAUSE:
             self.current_scene = MainMenu(self, screen)

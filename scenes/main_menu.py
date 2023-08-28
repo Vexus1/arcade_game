@@ -12,13 +12,13 @@ class MainMenu(Scene):
         screen_height = self.screen.get_height()
         self.start_button = TextButton(self.screen, 'Start', 
                                        (screen_width//2, screen_height*3/10), SCENE_PLAY)
-        self.high_score_button = TextButton(self.screen, 'High Score',
-                                            (screen_width//2, screen_height*4/10), SCENE_HIGH_SCORE)
-        self.rules_button = TextButton(self.screen, 'Rules',
-                                       (screen_width//2, screen_height*5/10), SCENE_RULES)
+        self.level_select_button = TextButton(self.screen, 'Level select',
+                                            (screen_width//2, screen_height*4/10), SCENE_LEVEL_SECECT)
+        self.option_button = TextButton(self.screen, 'options',
+                                       (screen_width//2, screen_height*5/10), SCENE_OPTIONS)
         self.quit_button = TextButton(self.screen, 'Quit',
                                       (screen_width//2, screen_height*6/10))
-        self.buttons_list = [self.start_button, self.high_score_button, self.rules_button, self.quit_button]
+        self.buttons_list = [self.start_button, self.level_select_button, self.option_button, self.quit_button]
         self.button_number = 0
 
     def handle_inputs(self, events, key_pressed_list):
@@ -43,8 +43,8 @@ class MainMenu(Scene):
                     self.manager.next_scene(self.buttons_list[self.button_number].scene_reference())
         
     def draw(self):
-        self.screen.fill(BLACK)
+        self.screen.fill(BLUE)
         self.start_button.draw()
-        self.high_score_button.draw()
-        self.rules_button.draw()
+        self.level_select_button.draw()
+        self.option_button.draw()
         self.quit_button.draw()
