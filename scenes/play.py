@@ -1,7 +1,8 @@
 from scenes.scene import Scene
 from player.player import *
 from enemy.enemy import *
-# from transition_scene import FadeTransitionScene
+from scenes.scene_delay import Delay
+
 
 ENEMIES_NUMBER = 9
 
@@ -18,15 +19,7 @@ class Play(Scene):
         self.enemies_beams = pygame.sprite.Group()
         self.enemy_formation()
         self.set_sprites() 
-        self.scene_delay = pygame.time.get_ticks() + SCENE_DELAY
         self.beam = False
-
-    def level_starting_delay(func):
-        """Delay at the start of the level in milliseconds"""
-        def inner(self, *kwargs, **args):
-            if pygame.time.get_ticks() >= self.scene_delay:
-                func(self, *kwargs, **args)
-        return inner
     
     def enemy_formation(self):
         screen_width = self.screen.get_width()
@@ -46,7 +39,7 @@ class Play(Scene):
             self.enemies.add(enemy)
             self.all_sprites.add(enemy)
     
-    @level_starting_delay
+    @Delay.scene_starting_delay
     def handle_inputs(self, events, key_pressed_list):
         if key_pressed_list[pygame.K_w]:
             self.player.move(0,-1)
@@ -59,7 +52,7 @@ class Play(Scene):
         if key_pressed_list[pygame.K_SPACE]:
             self.beam = self.player.shoot()
 
-    @level_starting_delay
+    @Delay.scene_starting_delay
     def update(self, dt):
         # use to pause the game
         # if self.playing_state != STATE_PLAYING:
@@ -81,7 +74,9 @@ class Play(Scene):
         self.all_sprites.update(dt)
 
         # Detect collisions between aliens and player.
-        if pygame.sprite.spritecollideany(self.player, self.enemies, pygame.sprite.collide_mask):
+        for enemy in pygame.sprite.spritecollide(self.player, self.enemies, pygame.sprite.collide_mask):
+            enemy.kill()
+            self.player.kill()
             self.manager.next_scene(SCENE_MAIN_MENU)
 
         # Detect collisions between enemy and player beams.

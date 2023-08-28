@@ -1,6 +1,8 @@
 from scenes.scene import Scene
 from constants import *
 from graphic_tools import TextButton
+from scenes.scene_delay import Delay
+
 import pygame
 import sys
 
@@ -19,8 +21,10 @@ class MainMenu(Scene):
         self.quit_button = TextButton(self.screen, 'Quit',
                                       (screen_width//2, screen_height*6/10))
         self.buttons_list = [self.start_button, self.level_select_button, self.option_button, self.quit_button]
+        self.scene_delay = pygame.time.get_ticks() + SCENE_DELAY
         self.button_number = 0
 
+    @Delay.scene_starting_delay
     def handle_inputs(self, events, key_pressed_list):
         for button in self.buttons_list:
             button.unselected()

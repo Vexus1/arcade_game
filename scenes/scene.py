@@ -1,9 +1,12 @@
 from abc import ABC, abstractmethod
+import pygame
+from constants import SCENE_DELAY
 
 class Scene(ABC):
     @abstractmethod
     def __init__(self, manager):
         self.manager = manager
+        self.scene_delay = pygame.time.get_ticks() + SCENE_DELAY # ms
 
     @abstractmethod
     def handle_inputs(self, events, keys_pressed):
