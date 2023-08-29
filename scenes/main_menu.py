@@ -15,13 +15,12 @@ class MainMenu(Scene):
         self.start_button = TextButton(self.screen, 'Start', 
                                        (screen_width//2, screen_height*3/10), SCENE_PLAY)
         self.level_select_button = TextButton(self.screen, 'Level select',
-                                            (screen_width//2, screen_height*4/10), SCENE_LEVEL_SECECT)
+                                              (screen_width//2, screen_height*4/10), SCENE_LEVEL_SECECT)
         self.option_button = TextButton(self.screen, 'options',
-                                       (screen_width//2, screen_height*5/10), SCENE_OPTIONS)
+                                        (screen_width//2, screen_height*5/10), SCENE_OPTIONS)
         self.quit_button = TextButton(self.screen, 'Quit',
                                       (screen_width//2, screen_height*6/10))
         self.buttons_list = [self.start_button, self.level_select_button, self.option_button, self.quit_button]
-        self.scene_delay = pygame.time.get_ticks() + SCENE_DELAY
         self.button_number = 0
 
     @Delay.scene_starting_delay

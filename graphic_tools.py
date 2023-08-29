@@ -31,9 +31,3 @@ class TextButton():
     
     def scene_reference(self):
         return self.scene
-   
-
-class Image():
-    def __init__(self, screen, loc, size):
-        pass
-
