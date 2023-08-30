@@ -76,19 +76,20 @@ class Play(Scene):
         for enemy in pygame.sprite.spritecollide(self.player, self.enemies, pygame.sprite.collide_mask):
             enemy.kill()
             self.player.kill()
+            self.player.player_death_sound()
             self.manager.next_scene(SCENE_MAIN_MENU)
 
         # Detect collisions between enemy and player beams.
         if self.player_beams:
-            pygame.sprite.groupcollide(self.enemies, self.player_beams, True, True, pygame.sprite.collide_mask)
-            # use when sounds will be upload
-            # for enemy in pygame.sprite.groupcollide(self.enemies, self.beams, True, True):
-                # enemy_kill.play()
+            for enemy in pygame.sprite.groupcollide(self.enemies, self.player_beams, True, True,  pygame.sprite.collide_mask):
+                enemy.enemy_death_sound()
+                enemy.kill()
 
         # Detect collisions between player and enemies beams.
         if self.enemies_beams:
             if pygame.sprite.spritecollideany(self.player, self.enemies_beams, pygame.sprite.collide_mask):
                 self.player.kill()
+                self.player.player_death_sound()
                 self.manager.next_scene(SCENE_MAIN_MENU)
 
         # Go to next stage if all enemies are killed

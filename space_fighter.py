@@ -2,13 +2,16 @@ import pygame
 import os
 import sys
 import time
-
+ 
 from constants import *
 from scene_manager import *
 
 os.chdir(os.path.dirname(os.path.abspath(__file__))) 
 
-pygame.init() 
+pygame.init()  
+pygame.mixer.init()
+pygame.mixer.music.load("sounds/theme.mp3")
+pygame.mixer.music.play()
 clock = pygame.time.Clock()
 current_scene = SceneManager()
 pygame.mouse.set_visible(False)

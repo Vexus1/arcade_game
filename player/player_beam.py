@@ -13,6 +13,9 @@ class PlayerBeam(pygame.sprite.Sprite):
         self.position = self.rect.y
         self.shooting_speed = self.screen.get_width()//2 # pixels per second 
         self.dt = 0
+        sound = pygame.mixer.Sound("sounds/player_beam_sound.mp3")
+        pygame.mixer.Sound.set_volume(sound, 0.5)
+        sound.play()
 
     def travel(self):
         self.position -= self.shooting_speed * self.dt

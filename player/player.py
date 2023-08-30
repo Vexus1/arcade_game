@@ -53,6 +53,11 @@ class Player(pygame.sprite.Sprite):
             beam_position = (self.rect.centerx, self.rect.y)
             beam = PlayerBeam(self.screen, beam_position)
             return beam
+        
+    def player_death_sound(self):
+        death_sound = pygame.mixer.Sound("sounds/player_kill_sound.mp3")
+        pygame.mixer.Sound.set_volume(death_sound, 0.5)
+        return death_sound.play()
     
     def update(self, dt):
         self.dt = dt

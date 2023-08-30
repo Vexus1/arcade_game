@@ -58,6 +58,11 @@ class Enemy(pygame.sprite.Sprite):
             beam = EnemyBeam(self.screen, beam_position)
             return beam
         
+    def enemy_death_sound(self):
+        death_sound = pygame.mixer.Sound("sounds/enemy_kill_sound.mp3")
+        pygame.mixer.Sound.set_volume(death_sound, 0.5)
+        return death_sound.play()
+        
     def update(self, dt):
         self.dt = dt
         self.route()
@@ -74,6 +79,7 @@ class EnemyBeam(pygame.sprite.Sprite):
         self.dt = 0
         self.beam_speed = self.screen.get_width()//3
         self.position = self.rect.y
+        pygame.mixer.Sound("sounds/enemy_beam_sound.mp3").play()
 
     def travel(self):
         self.position += self.beam_speed * self.dt
