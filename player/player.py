@@ -3,6 +3,7 @@ from constants import *
 from player.player_beam import *
 
 FIRERATE = 5 # shoots per second
+PLAYER_HEALTH = 5
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, screen):
