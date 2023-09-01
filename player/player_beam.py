@@ -1,6 +1,5 @@
 import pygame
 from constants import *
-import time
 
 class PlayerBeam(pygame.sprite.Sprite):
     def __init__(self, screen, set_position: tuple):
@@ -14,7 +13,7 @@ class PlayerBeam(pygame.sprite.Sprite):
         self.shooting_speed = self.screen.get_width()//2 # pixels per second 
         self.dt = 0
         sound = pygame.mixer.Sound("sounds/player_beam_sound.mp3")
-        pygame.mixer.Sound.set_volume(sound, 0.5)
+        pygame.mixer.Sound.set_volume(sound, 0.25)
         sound.play()
 
     def travel(self):

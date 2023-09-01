@@ -1,7 +1,6 @@
 import pygame
 from constants import *
 from player.player_beam import *
-import time
 
 FIRERATE = 5 # shoots per second
 
@@ -56,7 +55,7 @@ class Player(pygame.sprite.Sprite):
         
     def player_death_sound(self):
         death_sound = pygame.mixer.Sound("sounds/player_kill_sound.mp3")
-        pygame.mixer.Sound.set_volume(death_sound, 0.5)
+        pygame.mixer.Sound.set_volume(death_sound, 0.25)
         return death_sound.play()
     
     def update(self, dt):
