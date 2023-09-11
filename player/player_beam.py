@@ -18,7 +18,7 @@ class PlayerBeam(pygame.sprite.Sprite):
         pygame.mixer.Sound.set_volume(sound, 0.25)
         sound.play()
 
-    def beam_damage(self):
+    def damage(self):
         return BEAM_DAMAGE
 
     def travel(self):

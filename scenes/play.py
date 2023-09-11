@@ -75,25 +75,30 @@ class Play(Scene):
         # Detect collisions between aliens and player.
         for enemy in pygame.sprite.spritecollide(self.player, self.enemies, pygame.sprite.collide_mask):
             enemy.kill()
-            self.player.kill()
-            self.player.player_death_sound()
-            self.manager.next_scene(SCENE_MAIN_MENU)
+            self.player.get_damaged(enemy.collision_damage())
 
         # Detect collisions between enemy and player beams.
         if self.player_beams:
-            for enemy in pygame.sprite.groupcollide(self.enemies, self.player_beams, True, True,  pygame.sprite.collide_mask):
-                enemy.enemy_death_sound()
-                enemy.kill()
+            for enemy in pygame.sprite.groupcollide(self.enemies, self.player_beams,False, True, pygame.sprite.collide_mask):
+                enemy.get_damaged(self.player.damage())
 
         # Detect collisions between player and enemies beams.
         if self.enemies_beams:
             for beam in pygame.sprite.spritecollide(self.player, self.enemies_beams, pygame.sprite.collide_mask):
                 self.player.get_damaged(beam.damage())
             
+        # killing player after 0 health
         if self.player.health_points() <= 0:
             self.player.kill()
             self.player.player_death_sound()
             self.manager.next_scene(SCENE_MAIN_MENU)
+        
+        # killing enemy after 0 health
+        for enemy in self.enemies:
+            if enemy.health_points() <= 0:
+                print(len(self.enemies_list))
+                enemy.enemy_death_sound()
+                enemy.kill()
 
         # Go to next stage if all enemies are killed
         if not self.enemies:

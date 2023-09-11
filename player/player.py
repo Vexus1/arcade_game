@@ -51,8 +51,8 @@ class Player(pygame.sprite.Sprite):
     def shoot(self):
         if self.fire_rate():
             beam_position = (self.rect.centerx, self.rect.y)
-            beam = PlayerBeam(self.screen, beam_position)
-            return beam
+            self.beam = PlayerBeam(self.screen, beam_position)
+            return self.beam
         
     def player_death_sound(self):
         death_sound = pygame.mixer.Sound("sounds/player_kill_sound.mp3")
@@ -64,6 +64,9 @@ class Player(pygame.sprite.Sprite):
 
     def health_points(self):
         return self.hp
+    
+    def damage(self):
+        return self.beam.damage()
 
     def update(self, dt):
         self.dt = dt

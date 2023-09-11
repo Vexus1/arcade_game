@@ -7,7 +7,7 @@ from random import randint
 RANDOM_FIRERATE = (1/8, 1) # minimum and maximum shoots per second
 HEALTH_POINTS = 2
 BEAM_DAMAGE = 1
-# COLISSION_DAMAGE = 4
+COLLISION_DAMAGE = 5
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, screen, set_position: tuple):
@@ -67,11 +67,14 @@ class Enemy(pygame.sprite.Sprite):
         pygame.mixer.Sound.set_volume(death_sound, 0.25)
         return death_sound.play()
     
-    def get_damaged(self):
-        self.hp -= 1
+    def get_damaged(self, damage):
+        self.hp -= damage
 
     def health_points(self):
         return self.hp
+    
+    def collision_damage(self):
+        return COLLISION_DAMAGE
         
     def update(self, dt):
         self.dt = dt
