@@ -1,6 +1,8 @@
 import pygame
 from constants import *
 
+BEAM_DAMAGE = 1
+
 class PlayerBeam(pygame.sprite.Sprite):
     def __init__(self, screen, set_position: tuple):
         super().__init__()
@@ -15,6 +17,9 @@ class PlayerBeam(pygame.sprite.Sprite):
         sound = pygame.mixer.Sound("sounds/player_beam_sound.mp3")
         pygame.mixer.Sound.set_volume(sound, 0.25)
         sound.play()
+
+    def beam_damage(self):
+        return BEAM_DAMAGE
 
     def travel(self):
         self.position -= self.shooting_speed * self.dt

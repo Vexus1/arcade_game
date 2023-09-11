@@ -1,9 +1,9 @@
 import pygame
 from constants import *
-from player.player_beam import *
+from player.player_beam import PlayerBeam
 
 FIRERATE = 5 # shoots per second
-PLAYER_HEALTH = 5
+HEALTH_POINTS = 5
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, screen):
@@ -21,6 +21,7 @@ class Player(pygame.sprite.Sprite):
         self.fire_delay = 0     # in milliseconds
         self.dt = 0
         self.movement_speed = self.screen.get_width()//3 # pixels per second
+        self.hp = HEALTH_POINTS
     
     def starting_position(self):
         self.rect.centerx = self.screen.get_width()//2
@@ -28,7 +29,6 @@ class Player(pygame.sprite.Sprite):
 
     def move(self, x, y):
         '''Method that handle players moves (WASD) limits area (window size) to move for player sprite'''
-        # self.rect.move_ip(x*MOVEMENT_SPEED, y*MOVEMENT_SPEED)
         self.position.x += x * self.movement_speed * self.dt
         self.rect.x = round(self.position.x)
         self.position.y += y * self.movement_speed * self.dt
@@ -42,14 +42,14 @@ class Player(pygame.sprite.Sprite):
         if self.rect.left > self.max_x:
             self.rect.left = self.max_x
 
-    def _fire_rate(self):
+    def fire_rate(self):
         if self.time + self.fire_delay <= pygame.time.get_ticks():
             self.fire_delay = 1000/FIRERATE
             self.time = pygame.time.get_ticks()
             return True
 
     def shoot(self):
-        if self._fire_rate():
+        if self.fire_rate():
             beam_position = (self.rect.centerx, self.rect.y)
             beam = PlayerBeam(self.screen, beam_position)
             return beam
@@ -58,6 +58,12 @@ class Player(pygame.sprite.Sprite):
         death_sound = pygame.mixer.Sound("sounds/player_kill_sound.mp3")
         pygame.mixer.Sound.set_volume(death_sound, 0.25)
         return death_sound.play()
-    
+
+    def get_damaged(self, damage):
+        self.hp -= damage
+
+    def health_points(self):
+        return self.hp
+
     def update(self, dt):
         self.dt = dt

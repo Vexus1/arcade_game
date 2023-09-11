@@ -87,10 +87,13 @@ class Play(Scene):
 
         # Detect collisions between player and enemies beams.
         if self.enemies_beams:
-            if pygame.sprite.spritecollideany(self.player, self.enemies_beams, pygame.sprite.collide_mask):
-                self.player.kill()
-                self.player.player_death_sound()
-                self.manager.next_scene(SCENE_MAIN_MENU)
+            for beam in pygame.sprite.spritecollide(self.player, self.enemies_beams, pygame.sprite.collide_mask):
+                self.player.get_damaged(beam.damage())
+            
+        if self.player.health_points() <= 0:
+            self.player.kill()
+            self.player.player_death_sound()
+            self.manager.next_scene(SCENE_MAIN_MENU)
 
         # Go to next stage if all enemies are killed
         if not self.enemies:

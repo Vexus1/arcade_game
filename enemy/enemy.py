@@ -5,6 +5,9 @@ from math import floor
 from random import randint
 
 RANDOM_FIRERATE = (1/8, 1) # minimum and maximum shoots per second
+HEALTH_POINTS = 2
+BEAM_DAMAGE = 1
+# COLISSION_DAMAGE = 4
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, screen, set_position: tuple):
@@ -23,6 +26,7 @@ class Enemy(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.surf)
         self.movement_speed = self.screen.get_width()//15
         self.dt = 0
+        self.hp = HEALTH_POINTS
 
     def starting_position(self):
         self.rect.centerx = self.set_position[0] 
@@ -62,6 +66,12 @@ class Enemy(pygame.sprite.Sprite):
         death_sound = pygame.mixer.Sound("sounds/enemy_kill_sound.mp3")
         pygame.mixer.Sound.set_volume(death_sound, 0.25)
         return death_sound.play()
+    
+    def get_damaged(self):
+        self.hp -= 1
+
+    def health_points(self):
+        return self.hp
         
     def update(self, dt):
         self.dt = dt
@@ -88,6 +98,9 @@ class EnemyBeam(pygame.sprite.Sprite):
         self.rect.y = self.position
         if self.rect.bottom <= 0:
             self.kill()
+    
+    def damage(self):
+        return BEAM_DAMAGE
 
     def update(self, dt):
         self.dt = dt
