@@ -9,23 +9,25 @@ class Player(pygame.sprite.Sprite):
     def __init__(self, screen):
         super().__init__()
         self.screen = screen
+        self.screen_width = self.screen.get_width()
+        self.screen_height = self.screen.get_height()
         self.surf = pygame.image.load('images/player.png').convert_alpha()
-        self.surf = pygame.transform.scale(self.surf, (self.screen.get_width()//20, self.screen.get_height()//10))
+        self.surf = pygame.transform.scale(self.surf, (self.screen_width//20, self.screen_height//10))
         self.rect = self.surf.get_rect()
         self.starting_position()
         self.mask = pygame.mask.from_surface(self.surf)
-        self.max_x = self.screen.get_width() - self.rect.width
-        self.max_y = self.screen.get_height() - self.rect.height
+        self.max_x = self.screen_width  - self.rect.width
+        self.max_y = self.screen_height - self.rect.height
         self.position = pygame.math.Vector2(self.rect.topleft)
         self.time = 0           # in milliseconds
         self.fire_delay = 0     # in milliseconds
         self.dt = 0
-        self.movement_speed = self.screen.get_width()//3 # pixels per second
+        self.movement_speed = self.screen_width //3 # pixels per second
         self.hp = HEALTH_POINTS
     
     def starting_position(self):
-        self.rect.centerx = self.screen.get_width()//2
-        self.rect.y = self.screen.get_height() - self.rect.height
+        self.rect.centerx = self.screen_width //2
+        self.rect.y = self.screen_height - self.rect.height
 
     def move(self, x, y):
         '''Method that handle players moves (WASD) limits area (window size) to move for player sprite'''
@@ -67,6 +69,15 @@ class Player(pygame.sprite.Sprite):
     
     def damage(self):
         return self.beam.damage()
+    
+    # def health_bar(self, health_points):
+    #     bar = pygame.Rect(self.screen_width//20, self.screen_height//10,
+    #                       self.screen_width//20, self.screen_height//10)
+    #     for i in range(health_points):
+
+    #     # if self.get_damaged():
+    #     #     pass
+    #     # return pygame.draw.rect(self.screen, RED, bar)
 
     def update(self, dt):
         self.dt = dt

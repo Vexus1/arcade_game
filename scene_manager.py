@@ -18,10 +18,6 @@ class SceneManager():
         self.current_scene = Fader(self, screen, [MainMenu(self, screen)])
         self.during_change = False
 
-    def get_scene_names(self):
-        '''Method implemented in future when there will be to many scenes'''
-        pass
-    
     def next_scene(self, next_scene):
         if self.during_change:
             return

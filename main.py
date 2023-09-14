@@ -21,7 +21,7 @@ while True:
     dt = time.time() - prev_time
     prev_time = time.time()
 
-    keys_pressed = pygame.key.get_pressed()
+    keys_pressed = pygame.key.get_pressed() 
     events_list = []
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

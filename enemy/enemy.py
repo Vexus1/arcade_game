@@ -50,14 +50,14 @@ class Enemy(pygame.sprite.Sprite):
     def random_fire_delay(self):
         self.delay = randint(int(1000/RANDOM_FIRERATE[1]), int(1000/RANDOM_FIRERATE[0]))
     
-    def _random_shoot(self):
+    def random_shoot(self):
         if self.time + self.delay <= pygame.time.get_ticks():
             self.random_fire_delay()
             self.time = pygame.time.get_ticks()
             return True
 
     def shoot(self):
-        if self._random_shoot():
+        if self.random_shoot():
             beam_position = (self.rect.centerx, self.rect.y)
             beam = EnemyBeam(self.screen, beam_position)
             return beam

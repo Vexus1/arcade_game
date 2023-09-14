@@ -96,7 +96,6 @@ class Play(Scene):
         # killing enemy after 0 health
         for enemy in self.enemies:
             if enemy.health_points() <= 0:
-                print(len(self.enemies_list))
                 enemy.enemy_death_sound()
                 enemy.kill()
 
