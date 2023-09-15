@@ -3,6 +3,7 @@ import pygame
 from constants import *
 from math import floor
 from random import randint
+from health_bar import HealthBar
 
 RANDOM_FIRERATE = (1/8, 1) # minimum and maximum shoots per second
 HEALTH_POINTS = 2
@@ -26,7 +27,8 @@ class Enemy(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.surf)
         self.movement_speed = self.screen.get_width()//15
         self.dt = 0
-        self.hp = HEALTH_POINTS
+        self.hp, self.max_hp = HEALTH_POINTS, HEALTH_POINTS
+        self.health_bar = HealthBar(self.screen)
 
     def starting_position(self):
         self.rect.centerx = self.set_position[0] 
@@ -78,6 +80,8 @@ class Enemy(pygame.sprite.Sprite):
         
     def update(self, dt):
         self.dt = dt
+        self.health_bar.draw_health_bar(self.hp/self.max_hp, self.rect)
+        pygame.display.update()
         self.route()
         
 

@@ -1,6 +1,7 @@
 import pygame
 from constants import *
 from player.player_beam import PlayerBeam
+from health_bar import HealthBar
 
 FIRERATE = 5 # shoots per second
 HEALTH_POINTS = 5
@@ -23,7 +24,8 @@ class Player(pygame.sprite.Sprite):
         self.fire_delay = 0     # in milliseconds
         self.dt = 0
         self.movement_speed = self.screen_width //3 # pixels per second
-        self.hp = HEALTH_POINTS
+        self.hp, self.max_hp = HEALTH_POINTS, HEALTH_POINTS
+        self.health_bar = HealthBar(self.screen)
     
     def starting_position(self):
         self.rect.centerx = self.screen_width //2
@@ -69,15 +71,8 @@ class Player(pygame.sprite.Sprite):
     
     def damage(self):
         return self.beam.damage()
-    
-    # def health_bar(self, health_points):
-    #     bar = pygame.Rect(self.screen_width//20, self.screen_height//10,
-    #                       self.screen_width//20, self.screen_height//10)
-    #     for i in range(health_points):
-
-    #     # if self.get_damaged():
-    #     #     pass
-    #     # return pygame.draw.rect(self.screen, RED, bar)
 
     def update(self, dt):
+        self.health_bar.draw_health_bar(self.hp/self.max_hp, self.rect)
+        pygame.display.update()
         self.dt = dt

@@ -28,7 +28,7 @@ while True:
             pygame.quit()
             sys.exit() 
 
-        events_list.append(event) 
+        events_list.append(event)
  
     current_scene.get_current_scene().update(dt)
     current_scene.get_current_scene().handle_inputs(events_list, keys_pressed)
