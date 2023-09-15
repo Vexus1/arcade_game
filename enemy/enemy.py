@@ -89,7 +89,7 @@ class EnemyBeam(pygame.sprite.Sprite):
     def __init__(self, screen, set_position: tuple):
         super().__init__()
         self.screen = screen
-        self.surf = pygame.Surface((4,20))
+        self.surf = pygame.Surface((self.screen.get_width()//400, self.screen.get_height()//45))
         self.surf.fill(RED)
         self.rect = self.surf.get_rect(topleft=set_position)
         self.mask = pygame.mask.from_surface(self.surf)
