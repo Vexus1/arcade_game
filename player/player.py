@@ -4,7 +4,7 @@ from player.player_beam import PlayerBeam
 from health_bar import HealthBar
 
 FIRERATE = 5 # shoots per second
-HEALTH_POINTS = 5
+HEALTH_POINTS = 3
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, screen):
@@ -23,7 +23,7 @@ class Player(pygame.sprite.Sprite):
         self.time = 0           # in milliseconds
         self.fire_delay = 0     # in milliseconds
         self.dt = 0
-        self.movement_speed = self.screen_width //3 # pixels per second
+        self.movement_speed = self.screen_width//3 # pixels per second
         self.hp, self.max_hp = HEALTH_POINTS, HEALTH_POINTS
         self.health_bar = HealthBar(self.screen)
     

@@ -5,7 +5,7 @@ from math import floor
 from random import randint
 from health_bar import HealthBar
 
-RANDOM_FIRERATE = (1/8, 1) # minimum and maximum shoots per second
+RANDOM_FIRERATE = (1/2, 2) # minimum and maximum shoots per second
 HEALTH_POINTS = 2
 BEAM_DAMAGE = 1
 COLLISION_DAMAGE = 5
@@ -25,7 +25,7 @@ class Enemy(pygame.sprite.Sprite):
         self.starting_position()
         self.position = self.rect.centerx
         self.mask = pygame.mask.from_surface(self.surf)
-        self.movement_speed = self.screen.get_width()//15
+        self.movement_speed = self.screen.get_width()//10
         self.dt = 0
         self.hp, self.max_hp = HEALTH_POINTS, HEALTH_POINTS
         self.health_bar = HealthBar(self.screen)
