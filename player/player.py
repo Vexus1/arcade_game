@@ -26,6 +26,7 @@ class Player(pygame.sprite.Sprite):
         self.movement_speed = self.screen_width//3 # pixels per second
         self.hp, self.max_hp = HEALTH_POINTS, HEALTH_POINTS
         self.health_bar = HealthBar(self.screen)
+        self.health_bar.health_bar(self.hp/self.max_hp, self.rect)
     
     def starting_position(self):
         self.rect.centerx = self.screen_width //2
@@ -33,6 +34,7 @@ class Player(pygame.sprite.Sprite):
 
     def move(self, x, y):
         '''Method that handle players moves (WASD) limits area (window size) to move for player sprite'''
+        self.health_bar.health_bar(self.hp/self.max_hp, self.rect)
         self.position.x += x * self.movement_speed * self.dt
         self.rect.x = round(self.position.x)
         self.position.y += y * self.movement_speed * self.dt
@@ -73,6 +75,5 @@ class Player(pygame.sprite.Sprite):
         return self.beam.damage()
 
     def update(self, dt):
-        self.health_bar.draw_health_bar(self.hp/self.max_hp, self.rect)
-        pygame.display.update()
+        self.health_bar.health_bar(self.hp/self.max_hp, self.rect)
         self.dt = dt

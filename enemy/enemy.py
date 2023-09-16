@@ -29,6 +29,7 @@ class Enemy(pygame.sprite.Sprite):
         self.dt = 0
         self.hp, self.max_hp = HEALTH_POINTS, HEALTH_POINTS
         self.health_bar = HealthBar(self.screen)
+        self.health_bar.health_bar(self.hp/self.max_hp, self.rect)
 
     def starting_position(self):
         self.rect.centerx = self.set_position[0] 
@@ -80,8 +81,7 @@ class Enemy(pygame.sprite.Sprite):
         
     def update(self, dt):
         self.dt = dt
-        self.health_bar.draw_health_bar(self.hp/self.max_hp, self.rect)
-        pygame.display.update()
+        self.health_bar.health_bar(self.hp/self.max_hp, self.rect)
         self.route()
         
 

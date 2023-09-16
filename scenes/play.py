@@ -16,6 +16,7 @@ class Play(Scene):
         self.enemies = pygame.sprite.Group()
         self.player_beams = pygame.sprite.Group()
         self.enemies_beams = pygame.sprite.Group()
+        self.entity_group = pygame.sprite.Group()
         self.enemy_formation()
         self.set_sprites() 
         self.beam = False
@@ -34,8 +35,10 @@ class Play(Scene):
 
     def set_sprites(self):
         self.all_sprites.add(self.player)
+        self.entity_group.add(self.player)
         for enemy in self.enemies_list:
             self.enemies.add(enemy)
+            self.entity_group.add(enemy)
             self.all_sprites.add(enemy)
     
     @Delay.scene_starting_delay
@@ -53,10 +56,6 @@ class Play(Scene):
 
     @Delay.scene_starting_delay
     def update(self, dt):
-        # use to pause the game
-        # if self.playing_state != STATE_PLAYING:
-        #     return  
-
         # player beams
         if self.beam:
             self.player_beams.add(self.beam)
@@ -106,5 +105,8 @@ class Play(Scene):
     def draw(self):
         self.screen.blit(self.background, (0, 0))
         self.screen.set_alpha(100)
-        for entity in self.all_sprites:
-            self.screen.blit(entity.surf, entity.rect)
+        for sprite in self.all_sprites:
+            self.screen.blit(sprite.surf, sprite.rect)
+        for entity in self.entity_group:
+            entity.health_bar.draw()
+        

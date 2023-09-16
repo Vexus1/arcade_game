@@ -5,12 +5,15 @@ class HealthBar():
     def __init__(self, screen):
         self.screen = screen
         
-    def draw_health_bar(self, progress, sprite_rect):
-        health_rect = pygame.Rect(0, 0, sprite_rect.width, 7)
-        health_rect.midbottom = sprite_rect.centerx, sprite_rect.top
-        pygame.draw.rect(self.screen, RED, (health_rect.topleft, health_rect.size))
-        pygame.draw.rect(self.screen, BLACK, (health_rect.topleft, health_rect.size), 1)
-        inner_pos = (health_rect.topleft[0]+1, health_rect.topleft[1]+1)
-        inner_size = ((health_rect.size[0]-2) * progress, health_rect.size[1]-2)
-        rect = (round(inner_pos[0]), round(inner_pos[1]), round(inner_size[0]), round(inner_size[1]))
-        pygame.draw.rect(self.screen, GREEN, rect)
+    def health_bar(self, progress, sprite_rect):
+        self.health_rect = pygame.Rect(0, 0, sprite_rect.width, self.screen.get_height()//120)
+        self.health_rect.midbottom = sprite_rect.centerx, sprite_rect.top
+        self.inner_pos = (self.health_rect.topleft[0]+1, self.health_rect.topleft[1]+1)
+        self.inner_size = ((self.health_rect.size[0]-2) * progress, self.health_rect.size[1]-2)
+        self.rect = (round(self.inner_pos[0]), round(self.inner_pos[1]),
+                     round(self.inner_size[0]), round(self.inner_size[1]))
+
+    def draw(self):
+        pygame.draw.rect(self.screen, RED, (self.health_rect.topleft, self.health_rect.size))
+        pygame.draw.rect(self.screen, BLACK, (self.health_rect.topleft, self.health_rect.size), 1)
+        pygame.draw.rect(self.screen, GREEN, self.rect)
