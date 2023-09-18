@@ -8,7 +8,7 @@ from scenes.options import Options
 from scenes.transition_scene import Fader
 
 # screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-screen = pygame.display.set_mode((1600, 900))
+screen = pygame.display.set_mode(SCREEN_SIZE)
 
 class SceneError(Exception):
     pass

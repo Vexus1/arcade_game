@@ -3,7 +3,7 @@ from player.player import *
 from enemy.enemy import *
 from scenes.scene_delay import Delay
 
-ENEMIES_NUMBER = 9
+ENEMIES_NUMBER = 15
 
 class Play(Scene):
     def __init__(self, manager, screen):

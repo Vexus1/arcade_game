@@ -1,7 +1,7 @@
 import pygame
 from constants import *
 
-class HealthBar():
+class HealthBar:
     def __init__(self, screen):
         self.screen = screen
         
