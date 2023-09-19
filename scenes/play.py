@@ -21,7 +21,6 @@ class Play(Scene):
         self.enemy_formation()
         self.set_sprites() 
         self.beam = False
-        # self.paused = False
     
     def enemy_formation(self):
         screen_width = self.screen.get_width()
@@ -43,7 +42,6 @@ class Play(Scene):
             self.entity_group.add(enemy)
             self.all_sprites.add(enemy)
     
-    # @Pause.pause_game
     @Delay.scene_starting_delay
     def handle_inputs(self, events, key_pressed_list):
         if key_pressed_list[pygame.K_w]:
@@ -62,9 +60,6 @@ class Play(Scene):
                 if event.key == pygame.K_ESCAPE:
                     self.manager.next_scene(SCENE_PAUSE)
 
-            # self.paused = True
-
-    # @Pause.pause_game
     @Delay.scene_starting_delay
     def update(self, dt):
         # player beams
@@ -101,7 +96,6 @@ class Play(Scene):
         if self.player.health_points() <= 0:
             self.player.kill()
             self.player.player_death_sound()
-            print(self.manager)
             self.manager.next_scene(SCENE_MAIN_MENU)
         
         # killing enemy after 0 health
@@ -114,7 +108,6 @@ class Play(Scene):
         if not self.enemies:
             self.manager.next_scene(SCENE_MAIN_MENU)
 
-    # @Pause.pause_game
     def draw(self):
         self.screen.blit(self.background, (0, 0))
         for sprite in self.all_sprites:
