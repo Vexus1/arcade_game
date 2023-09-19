@@ -2,6 +2,7 @@ from scenes.scene import Scene
 from player.player import *
 from enemy.enemy import *
 from scenes.scene_delay import Delay
+from scenes.pause import Pause
 
 ENEMIES_NUMBER = 15
 
@@ -20,6 +21,7 @@ class Play(Scene):
         self.enemy_formation()
         self.set_sprites() 
         self.beam = False
+        # self.paused = False
     
     def enemy_formation(self):
         screen_width = self.screen.get_width()
@@ -41,6 +43,7 @@ class Play(Scene):
             self.entity_group.add(enemy)
             self.all_sprites.add(enemy)
     
+    @Pause.pause_game
     @Delay.scene_starting_delay
     def handle_inputs(self, events, key_pressed_list):
         if key_pressed_list[pygame.K_w]:
@@ -51,9 +54,13 @@ class Play(Scene):
             self.player.move(0,1)
         elif key_pressed_list[pygame.K_d]:
             self.player.move(1,0)
-        if key_pressed_list[pygame.K_SPACE]:
+        elif key_pressed_list[pygame.K_SPACE]:
             self.beam = self.player.shoot()
+        elif key_pressed_list[pygame.K_ESCAPE]: # implement this in future abstract class stage
+            Pause(self.screen, self.manager)
+            self.paused = True
 
+    @Pause.pause_game
     @Delay.scene_starting_delay
     def update(self, dt):
         # player beams
@@ -102,9 +109,9 @@ class Play(Scene):
         if not self.enemies:
             self.manager.next_scene(SCENE_MAIN_MENU)
 
+    # @Pause.pause_game
     def draw(self):
         self.screen.blit(self.background, (0, 0))
-        self.screen.set_alpha(100)
         for sprite in self.all_sprites:
             self.screen.blit(sprite.surf, sprite.rect)
         for entity in self.entity_group:

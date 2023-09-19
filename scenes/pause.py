@@ -1,15 +1,26 @@
-from scene import Scene
+import pygame
+
+from scenes.scene import Scene
+
+ALPHA = 100
 
 class Pause(Scene):
-    def __init__(self, manager, screen):
-        super.__init__(manager)
+    def __init__(self, screen):
         self.screen = screen
+        self.veil = pygame.Surface(self.screen.get_size())
 
-    def get_current_scene(self):
-        pass
+    def pause_game(func):
+        def inner(self, *kwargs, **args):
+            if not self.paused:
+                func(self, *kwargs, **args)
+        return inner
 
-    def handle_inputs(self, events, keys_pressed):
-        return super().handle_inputs(events, keys_pressed)
+    def handle_inputs(self, events, key_pressed_list):
+        if key_pressed_list[pygame.K_ESCAPE]:
+
+            self.paused = False
     
     def draw(self):
-        return super().draw()
+        self.veil.set_alpha(100)
+        self.screen.blit(self.veil, (0, 0))
+        # self.screen.set_alpha(ALPHA)

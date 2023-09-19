@@ -3,7 +3,7 @@ import pygame
 FPS = 144
 SCREEN_SIZE = (1600, 900)
 
-SCENE_DELAY = 1000
+DELAY_TIME = 1000
 
 SCENE_MAIN_MENU = 'scene main menu'
 SCENE_PLAY = 'scene play'

@@ -30,6 +30,8 @@ class SceneManager():
             self.current_scene = Fader(self, screen, [self.current_scene, LevelSelect(self, screen)])
         elif next_scene == SCENE_OPTIONS:
             self.current_scene = Fader(self, screen, [self.current_scene, Options(self, screen)]) 
+        elif next_scene == SCENE_PAUSE:
+            pass
         else:
             raise SceneError(f"Scene {next_scene} doesn't exit")
 

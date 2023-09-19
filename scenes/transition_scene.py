@@ -10,7 +10,7 @@ class Fader(Scene):
         self.screen = screen
         self.scenes = scenes
         self.scene = self.scenes[0]
-        self.scene_delay = SCENE_DELAY # 1000ms
+        self.scene_delay = DELAY_TIME # 1000ms
         self.fading = 'OUT'
         self.alpha_dt = 0
         self.alpha = 0
@@ -23,7 +23,7 @@ class Fader(Scene):
             self.alpha = ALPHA_MAX
             self.alpha_dt = ALPHA_MAX
             self.fading = 'IN'
-            self.scene_delay = SCENE_DELAY*2
+            self.scene_delay = DELAY_TIME*2
     
     def handle_inputs(self, events, keys_pressed):
         self.scene.handle_inputs(events, keys_pressed)
