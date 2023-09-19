@@ -5,6 +5,7 @@ from scenes.main_menu import MainMenu
 from scenes.play import Play
 from scenes.level_select import LevelSelect
 from scenes.options import Options
+from scenes.pause import Pause
 from scenes.transition_scene import Fader
 
 # screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
@@ -31,7 +32,7 @@ class SceneManager():
         elif next_scene == SCENE_OPTIONS:
             self.current_scene = Fader(self, screen, [self.current_scene, Options(self, screen)]) 
         elif next_scene == SCENE_PAUSE:
-            pass
+            self.current_scene = Pause(self, self.current_scene.screen, self.current_scene)
         else:
             raise SceneError(f"Scene {next_scene} doesn't exit")
 

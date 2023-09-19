@@ -17,7 +17,6 @@ class Scene(ABC):
     def update(self, dt):
         pass
     
-
     @abstractmethod
     def draw(self):
         raise NotImplementedError

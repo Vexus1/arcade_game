@@ -43,7 +43,7 @@ class Play(Scene):
             self.entity_group.add(enemy)
             self.all_sprites.add(enemy)
     
-    @Pause.pause_game
+    # @Pause.pause_game
     @Delay.scene_starting_delay
     def handle_inputs(self, events, key_pressed_list):
         if key_pressed_list[pygame.K_w]:
@@ -56,11 +56,15 @@ class Play(Scene):
             self.player.move(1,0)
         elif key_pressed_list[pygame.K_SPACE]:
             self.beam = self.player.shoot()
-        elif key_pressed_list[pygame.K_ESCAPE]: # implement this in future abstract class stage
-            Pause(self.screen, self.manager)
-            self.paused = True
+        
+        for event in events:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    self.manager.next_scene(SCENE_PAUSE)
 
-    @Pause.pause_game
+            # self.paused = True
+
+    # @Pause.pause_game
     @Delay.scene_starting_delay
     def update(self, dt):
         # player beams
@@ -97,6 +101,7 @@ class Play(Scene):
         if self.player.health_points() <= 0:
             self.player.kill()
             self.player.player_death_sound()
+            print(self.manager)
             self.manager.next_scene(SCENE_MAIN_MENU)
         
         # killing enemy after 0 health
