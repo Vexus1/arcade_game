@@ -1,7 +1,7 @@
 import pygame
 
-FPS = 144
-SCREEN_SIZE = (1600, 900)
+FPS = 60
+SCREEN_SIZE = (1060, 530)
 
 DELAY_TIME = 1000
 

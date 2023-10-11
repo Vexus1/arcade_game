@@ -46,19 +46,19 @@ class Play(Scene):
     def handle_inputs(self, events, key_pressed_list):
         if key_pressed_list[pygame.K_w]:
             self.player.move(0,-1)
-        elif key_pressed_list[pygame.K_a]:
+            print("w")
+        if key_pressed_list[pygame.K_a]:
             self.player.move(-1,0)
-        elif key_pressed_list[pygame.K_s]:
+            print("a")
+        if key_pressed_list[pygame.K_s]:
             self.player.move(0,1)
-        elif key_pressed_list[pygame.K_d]:
+            print("s")
+        if key_pressed_list[pygame.K_d]:
             self.player.move(1,0)
-        elif key_pressed_list[pygame.K_SPACE]:
+            print("d")
+        if key_pressed_list[pygame.K_SPACE]:
             self.beam = self.player.shoot()
         
-        for event in events:
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    self.manager.next_scene(SCENE_PAUSE)
 
     @Delay.scene_starting_delay
     def update(self, dt):

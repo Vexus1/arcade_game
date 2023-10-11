@@ -52,7 +52,7 @@ class Player(pygame.sprite.Sprite):
         if self.time + self.fire_delay <= pygame.time.get_ticks():
             self.fire_delay = 1000/FIRERATE
             self.time = pygame.time.get_ticks()
-            return True
+        return True
 
     def shoot(self):
         if self.fire_rate():
