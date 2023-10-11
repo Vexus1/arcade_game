@@ -34,11 +34,11 @@ class Player(pygame.sprite.Sprite):
 
     def move(self, x, y):
         '''Method that handle players moves (WASD) limits area (window size) to move for player sprite'''
-        self.health_bar.health_bar(self.hp/self.max_hp, self.rect)
         self.position.x += x * self.movement_speed * self.dt
         self.rect.x = round(self.position.x)
         self.position.y += y * self.movement_speed * self.dt
         self.rect.y = round(self.position.y)
+        self.health_bar.health_bar(self.hp/self.max_hp, self.rect)
         if self.rect.top < 0:
             self.rect.top = 0
         if self.rect.top > self.max_y:
@@ -46,13 +46,13 @@ class Player(pygame.sprite.Sprite):
         if self.rect.left < 0:
             self.rect.left = 0
         if self.rect.left > self.max_x:
-            self.rect.left = self.max_x
+            self.rect.left = self.max_x 
 
     def fire_rate(self):
         if self.time + self.fire_delay <= pygame.time.get_ticks():
             self.fire_delay = 1000/FIRERATE
             self.time = pygame.time.get_ticks()
-        return True
+            return True
 
     def shoot(self):
         if self.fire_rate():
@@ -75,5 +75,4 @@ class Player(pygame.sprite.Sprite):
         return self.beam.damage()
 
     def update(self, dt):
-        self.health_bar.health_bar(self.hp/self.max_hp, self.rect)
         self.dt = dt

@@ -68,11 +68,11 @@ class Play(Scene):
             self.all_sprites.add(self.beam)
 
         # enemies beam 
-        for enemy in self.enemies:
-            beam = enemy.shoot()
-            if beam:
-                self.enemies_beams.add(beam)
-                self.all_sprites.add(beam)
+        # for enemy in self.enemies:
+            # beam = enemy.shoot()
+            # if beam:
+            #     self.enemies_beams.add(beam)
+            #     self.all_sprites.add(beam)
 
         # update all the sprites
         self.all_sprites.update(dt)

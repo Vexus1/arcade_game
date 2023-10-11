@@ -81,8 +81,8 @@ class Enemy(pygame.sprite.Sprite):
         
     def update(self, dt):
         self.dt = dt
-        self.health_bar.health_bar(self.hp/self.max_hp, self.rect)
         self.route()
+        self.health_bar.health_bar(self.hp/self.max_hp, self.rect)
         
 
 class EnemyBeam(pygame.sprite.Sprite):
