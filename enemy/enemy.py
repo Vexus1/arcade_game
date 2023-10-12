@@ -4,6 +4,7 @@ from constants import *
 from math import floor
 from random import randint
 from health_bar import HealthBar
+from clock import Timer
 
 RANDOM_FIRERATE = (1/2, 2) # minimum and maximum shoots per second
 HEALTH_POINTS = 2
@@ -17,7 +18,8 @@ class Enemy(pygame.sprite.Sprite):
         self.set_position = set_position
         self.max_left_reached = False
         self.max_right_reached = False
-        self.time = DELAY_TIME/2 + pygame.time.get_ticks()
+        self.timer = Timer()
+        self.time = DELAY_TIME/2 + self.timer.current_time()
         self.random_fire_delay()
         self.surf = pygame.image.load('images/enemy.png').convert_alpha()
         self.surf = pygame.transform.scale(self.surf, (self.screen.get_width()//30, self.screen.get_height()//15))
@@ -56,7 +58,7 @@ class Enemy(pygame.sprite.Sprite):
     def random_shoot(self):
         if self.time + self.delay <= pygame.time.get_ticks():
             self.random_fire_delay()
-            self.time = pygame.time.get_ticks()
+            self.time = Timer.current_time()
             return True
 
     def shoot(self):
