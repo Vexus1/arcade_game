@@ -16,14 +16,14 @@ class Pause(Scene):
 
     def pause_screen(self):
         screen_rect = self.screen.get_rect()
-        pause_text = Text(self.surface, ('Game paused: Escape to resume'), screen_rect.center, size=40, color=BLACK)
+        pause_text = Text(self.surface, ('Game paused: ENTER to resume or press SPACE to main menu'), screen_rect.center, size=40, color=BLACK)
         faded_screen = pygame.draw.rect(self.surface, (GRAY + (FADE,)), [0, 0, self.screen.get_width(), self.screen.get_height()])
         return faded_screen, pause_text.draw()
 
     def handle_inputs(self, events, key_pressed_list):
         for event in events:
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
+                if event.key == pygame.K_SPACE:
                     self.manager.during_change = False                 
                     self.manager.current_scene = self.paused_scene  # relocate this into abstract class when more stages will be added
     

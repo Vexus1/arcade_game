@@ -54,6 +54,11 @@ class Play(Scene):
             self.player.move(1,0)
         if key_pressed_list[pygame.K_SPACE]:
             self.beam = self.player.shoot()
+
+        for event in events:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    self.manager.next_scene(SCENE_PAUSE)
         
 
     @Delay.scene_starting_delay
