@@ -1,20 +1,18 @@
 import pygame
-from scenes.pause import Pause
+from scene_manager import SceneManager
+from constants import *
 
 class Timer():
     def __init__(self):
         self.time = pygame.time.get_ticks()
-        self.pause = Pause()
         self.update_timer()
 
     def update_timer(self):
-        if Pause:
-            self.time_before_pause = self.pause._pause_time()
-            self.time += self.time_before_pause
-
+        if SceneManager.get_current_scene() == SCENE_PAUSE:
+            time = self.time
+        if SceneManager.get_current_scene() == SCENE_PLAY:
+            self.time -= time
+        
     def current_time(self):
         return self.time
-    
-    # def __repr__(self):
-    #     return self.time
     

@@ -21,6 +21,7 @@ class Play(Scene):
         self.enemy_formation()
         self.set_sprites() 
         self.beam = False
+        self.timer.update_timer()
     
     def enemy_formation(self):
         screen_width = self.screen.get_width()

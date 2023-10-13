@@ -3,7 +3,6 @@ import pygame
 from scenes.scene import Scene
 from graphic_tools import Text
 from constants import *
-# from clock import Timer
 
 FADE = 150
 
@@ -13,7 +12,7 @@ class Pause(Scene):
         self.screen = screen
         self.paused_scene = paused_scene
         self.surface = pygame.Surface((self.screen.get_width(), self.screen.get_height()), pygame.SRCALPHA)
-        self.pause_time = 0
+        self.timer.update_timer()
       
     def pause_screen(self):
         screen_rect = self.screen.get_rect()
@@ -29,7 +28,6 @@ class Pause(Scene):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     self.manager.during_change = False 
-                    self.pause_time = pygame.time.get_ticks()
                     self.manager.current_scene = self.paused_scene  # relocate this into abstract class when more stages will be added
     
     def draw(self):
