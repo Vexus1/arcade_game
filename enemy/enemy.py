@@ -19,6 +19,7 @@ class Enemy(pygame.sprite.Sprite):
         self.max_left_reached = False
         self.max_right_reached = False
         self.time = DELAY_TIME/2 + pygame.time.get_ticks()
+        self.random_fire_delay()
         self.surf = pygame.image.load('images/enemy.png').convert_alpha()
         self.surf = pygame.transform.scale(self.surf, (self.screen.get_width()//30, self.screen.get_height()//15))
         self.rect = self.surf.get_rect()
