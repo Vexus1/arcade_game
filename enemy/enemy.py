@@ -4,6 +4,7 @@ from constants import *
 from math import floor
 from random import randint
 from health_bar import HealthBar
+from scenes.scene import Scene
 
 RANDOM_FIRERATE = (1/2, 2) # minimum and maximum shoots per second
 HEALTH_POINTS = 2
@@ -18,7 +19,6 @@ class Enemy(pygame.sprite.Sprite):
         self.max_left_reached = False
         self.max_right_reached = False
         self.time = DELAY_TIME/2 + pygame.time.get_ticks()
-        self.random_fire_delay()
         self.surf = pygame.image.load('images/enemy.png').convert_alpha()
         self.surf = pygame.transform.scale(self.surf, (self.screen.get_width()//30, self.screen.get_height()//15))
         self.rect = self.surf.get_rect()
@@ -30,6 +30,7 @@ class Enemy(pygame.sprite.Sprite):
         self.hp, self.max_hp = HEALTH_POINTS, HEALTH_POINTS
         self.health_bar = HealthBar(self.screen)
         self.health_bar.health_bar(self.hp/self.max_hp, self.rect)
+        self.random_fire_delay()
 
     def starting_position(self):
         self.rect.centerx = self.set_position[0] 
